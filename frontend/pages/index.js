@@ -9,7 +9,7 @@ import Seo from "../components/seo";
 import { fetchAPI } from "../lib/api";
 
 function HomePage({ posts, /*categories, menus,*/ homepage }) {
-  console.log('HOMEPAGE ============================!!!!!! ', homepage);
+  console.log('HOMEPAGE ============================ ', homepage);
   const seo = {
     metaTitle: homepage.attributes.SEO.metaTitle,
     metaDescription: homepage.attributes.SEO.mataDescription,
