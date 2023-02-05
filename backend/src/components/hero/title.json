@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_hero_titles",
+  "info": {
+    "displayName": "title"
+  },
+  "options": {},
+  "attributes": {
+    "slogan1": {
+      "type": "text"
+    },
+    "slogan2": {
+      "type": "richtext"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_menu_sub_menu_items",
+  "info": {
+    "displayName": "SubMenuItem",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Name": {
+      "type": "string",
+      "required": true
+    },
+    "page": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::page.page"
+    },
+    "URL": {
+      "type": "string"
+    }
+  }
+}
