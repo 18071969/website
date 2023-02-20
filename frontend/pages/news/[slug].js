@@ -1,23 +1,9 @@
-import Link from "next/link";
 import Seo from "../../components/seo";
-import Layout from "../../components/layout";
 import ReactMarkdown from 'react-markdown'; //react-markdown/with-html
 
 import { fetchAPI, getItemBySlug, getMenu } from "../../lib/api";
 import { getStrapiMedia } from "../../lib/media";
 
-//import { getEItemById, getFeaturedItems } from '../../lib/api';
-
-/*export default function Post({ selectedItem }) {
-  console.log('BBBBBBBBBBBBBBBBBBB ', selectedItem);
-  return (
-    <div>
-      <Link href="/">Home</Link> | <Link href="/about">About Us</Link> | <Link href="/news">News</Link>
-      <h2>{selectedItem.data.attributes.title}</h2>
-      <p>{selectedItem.data.attributes.content}</p>
-    </div>
-  );
-}*/
 const Post = ({ article/*, menus*/ }) => {
   const imageUrl = getStrapiMedia(article.attributes.featuredImage);
   console.log('BBBBBBBBBBBBBBBBBBB pages/news/[slug].js  article = ', article);
@@ -44,8 +30,8 @@ const Post = ({ article/*, menus*/ }) => {
       </div>
       <div className="uk-section">
         <div className="uk-container uk-container-small">
-          <ReactMarkdown children={article.attributes.content}  escapeHtml={false}/> 
-  
+          {/*<ReactMarkdown children={article.attributes.content}  escapeHtml={false}/> */}
+          {article.attributes.content}
           <hr className="uk-divider-small" />
           <div className="uk-grid-small uk-flex-left" data-uk-grid="true">
             {/*<div>
@@ -125,26 +111,10 @@ export async function getStaticProps({ params }) {
   };
 }
 
-/*export async function getStaticPaths() {
-  const res = await fetch("http://localhost:1337/api/posts");
-  //const items = await getItems();
-  //const paths = items.map(item => ({ params: { newsId: item.id } }));
-  const posts = await res.json();
-  console.log('WWWWWWWWWWWWWWWWWWWW ', posts);
-  const paths = posts.data.map((post) => ({
-    //params: { newsId: post.id.toString() },
-    params: { slug: post.attributes.slug },
-  }));
-  return {
-    paths: paths,
-    fallback: 'blocking'
-  };
-}*/
-
 export async function getStaticPaths() {
 
   const articlesRes = await fetchAPI("/posts", { fields: ["slug"] });
-console.log('WWWWWWWWWWWWWWWWWWWW getStaticPaths articlesRes = ', articlesRes);
+//console.log('WWWWWWWWWWWWWWWWWWWW getStaticPaths articlesRes = ', articlesRes);
   return {
     paths: articlesRes.data.map((article) => ({
       params: {

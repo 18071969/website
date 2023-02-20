@@ -3,8 +3,6 @@ import NextImage from "next/image";
 
 const Image = ({ image }) => {
 
-    console.log('Components/image.js image = &&&&&&&&&&&&&&&&&&&&&&', image.data.attributes);
-    //if(!image) return;
   const { alternativeText, width, height } = image.data.attributes;
   //console.log('Components/image.js image.data.attributes = &&&&&&&&&&&&&&&&&&&&&&', image.data.attributes);
   return (

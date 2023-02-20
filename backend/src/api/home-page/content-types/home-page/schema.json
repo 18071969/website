@@ -29,14 +29,40 @@
       "type": "string"
     },
     "featuredImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
+    },
+    "servicesPreview": {
+      "displayName": "servicesPreview",
+      "type": "component",
+      "repeatable": false,
+      "component": "layout.services-preview"
+    },
+    "featuredJob": {
+      "displayName": "featuredJob",
+      "type": "component",
+      "repeatable": false,
+      "component": "layout.featured-job"
+    },
+    "postsSelection": {
+      "displayName": "postsSection",
+      "type": "component",
+      "repeatable": false,
+      "component": "blog.posts-section"
+    },
+    "dynamicHomeSection": {
+      "type": "dynamiczone",
+      "components": [
+        "layout.newsletter-form",
+        "layout.mission"
+      ]
     }
   }
 }

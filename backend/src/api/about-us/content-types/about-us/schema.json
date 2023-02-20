@@ -26,6 +26,19 @@
     "Slug": {
       "type": "uid",
       "targetField": "Title"
+    },
+    "headerImage": {
+      "allowedTypes": [
+        "images",
+        "videos"
+      ],
+      "type": "media",
+      "multiple": true
+    },
+    "tags": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::tag.tag"
     }
   }
 }

@@ -1,0 +1,30 @@
+/*.wrapper {
+    border: 1px solid red;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}*/
+.wrapper {
+    display: grid;
+    /*grid-template-columns: 50px 50px 50px 50px;*/
+    grid-template-rows: auto;
+    grid-template-areas: 
+      "header header header"
+      "item item item";
+    column-gap: 4rem;
+  }
+  .titleSection {
+    grid-area: header;
+    justify-self: center;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 2;
+  }
+  .items {
+    grid-area: item;
+    /*column-gap: 4rem;*/
+  }

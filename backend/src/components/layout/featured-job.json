@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_layout_featured_jobs",
+  "info": {
+    "displayName": "featuredJob",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "job": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::job.job"
+    },
+    "heading": {
+      "type": "string"
+    },
+    "announcement": {
+      "type": "text"
+    }
+  }
+}

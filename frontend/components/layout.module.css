@@ -1,0 +1,20 @@
+.container main {
+    /*font-family: monospace;
+    font-size: 20px;
+    text-align: center;*/
+    /* the text in the boxes to be centered*/
+  /*  display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid blue !important;
+    margin: 50px;*/
+  }
+
+  .container {
+    /*display: flex;*/
+    flex-wrap: wrap;
+    /*border: 5px solid blue !important;*/
+    align-items: center;
+    justify-content: center;
+    background-color: #e4f1f1;
+  }

@@ -5,7 +5,7 @@ import { getStrapiMedia } from "../lib/media";
 
 const Seo = ({ seo }) => {
     
-    console.log('SEO>seo +++++++++++++++++++++ ', seo);
+    //console.log('SEO>seo +++++++++++++++++++++ ', seo);
     //console.log('SEO>JS GlobalContext +++++++++++++++++++++ ', GlobalContext);
    
   const { DefaultSeo, SiteName } = useContext(GlobalContext);
@@ -18,6 +18,7 @@ const Seo = ({ seo }) => {
   //console.log('SEO>JS DefaultSeo +++++++++++++++++++++ ', DefaultSeo);
   //console.log('SEO>JS SiteName +++++++++++++++++++++ ', SiteName);
   //console.log('SEO>JS seoWithDefaults +++++++++++++++++++++ ', seoWithDefaults);
+  //console.log('SEO>JS getStrapiMedia +++++++++++++++++++++ ', getStrapiMedia(seoWithDefaults.shareImage));
 
   const fullSeo = {
     ...seoWithDefaults,

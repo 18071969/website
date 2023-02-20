@@ -6,20 +6,25 @@ function MyApp({ Component, pageProps }) {
 import App from "next/app";
 import Head from "next/head";
 import Layout from "../components/layout";
+import Footer from "../components/footer";
 //import "../assets/css/style.css";
 import { createContext } from "react";
 import { fetchAPI } from "../lib/api";
 import { getStrapiMedia } from "../lib/media";
 
+import "../styles/globals.css";
+
 // Store Strapi Global object in context
 export const GlobalContext = createContext({});
 
 const MyApp = ({ Component, pageProps }) => {
-  const { global, menusPl } = pageProps;
+const { global, menusPl, footerMenu, compInfo } = pageProps;
   //console.log('GLOBAL _app.js -----global------ ', global);
+  //console.log('GLOBAL _app.js -----global.attributes.Favicon------ ', global.attributes.Favicon);
   //console.log('MENUS _app.js menus HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHhh pageProps ', pageProps);
-  console.log('MENUS _app.js menus WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW menusPl ', menusPl);
-
+  //console.log('MENUS _app.js menus WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW menusPl ', menusPl);
+  const imageUrl = getStrapiMedia(global.attributes.Favicon);
+  //console.log('GLOBAL _app.js -----imageUrl------ ', imageUrl);
   return (
     <>
       <Head>
@@ -31,6 +36,7 @@ const MyApp = ({ Component, pageProps }) => {
       <GlobalContext.Provider value={global.attributes}>
         <Layout menus={menusPl}>
           <Component {...pageProps} />
+          <Footer fmenus={footerMenu} cInfo={compInfo} />
         </Layout>
       </GlobalContext.Provider>
     </>
@@ -52,6 +58,14 @@ MyApp.getInitialProps = async (ctx) => {
         populate: "*",
       },
     },
+  });
+
+  const companyInfo = await fetchAPI("/company-info", {
+    populate: "*",
+  });
+
+  const footer = await fetchAPI("/footer", {
+    populate: "*",
   });
   /*
   const menusRes = await fetchAPI("/main-menu", { 
@@ -82,27 +96,30 @@ MyApp.getInitialProps = async (ctx) => {
       },
     } },
   });
-  console.log('MENUS  _app.js mainMenu.data ----------------------------- ', mainMenu.data);
-  let menu_items = [];
-  menu_items = mainMenu.data.attributes.items.data;
-  //menusPlRes.data.map(menu => {
-    //console.log('MENUS  _app.js menusPlRes.data.map menu.attributes.items.data ----------------------------- ', menu.attributes.items.data);
-    //menu_items = menu.attributes.items.data;
-    //menu_items = temp.attributes.items.data;
-    //menu_items.map(item => {
-      //console.log('MENUS  _app.js menusPlRes.data.map menu.attributes.items.data = ITEM  ----------------------------- ', item);
-      //console.log('item.id = ', item.id);
-      //console.log('item.attributes.title = ', item.attributes.title);
-      ///console.log('item.attributes.url = ', item.attributes.url);
-      //console.log('item.attributes.children.data = ', item.attributes.children.data);
-    //  if(item.attributes.children.data) {
-        //console.log('---item.attributes.children.data.attributes = ', item.attributes.children.data.attributes);
-        //console.log('---item.attributes.children.data.id = ', item.attributes.children.data.id);
-    //  }
-    //})
-  //})
+  //console.log('MENUS  _app.js mainMenu.data ----------------------------- ', mainMenu.data);
+  let main_menu_items = [];
+  main_menu_items = mainMenu.data.attributes.items.data;
+  
+  const footerMenu = await fetchAPI("/menus/2", { 
+  //const footerMenu = await fetchAPI("/menus?filters[slug][$eq]=footer-menu", { 
+    nested: { populate: "*" },
+    /*populate: {
+      items: { populate: "*" },
+    },*/
+    populate: {
+      //items: { populate: "*" },
+      items: { populate: {
+        children: { populate: "*" },
+      },
+    }},
+  });
+  //console.log('MENUS FOOTER _app.js footerMenu.data ----------------------------- ', footerMenu.data);
+  let footer_menu_items = [];
+  footer_menu_items = footerMenu.data.attributes.items.data;
+  //console.log('MENUS FOOTER _app.js footer_menu_items  ----------------------------- ', footer_menu_items );
+
   // Pass the data to our page via props
-  return { ...appProps, pageProps: { global: globalRes.data, /*menus: menusRes.data,*/ menusPl: menu_items } };
+  return { ...appProps, pageProps: { global: globalRes.data, /*menus: menusRes.data,*/ menusPl: main_menu_items, footerMenu: footer_menu_items, compInfo: companyInfo.data } };
 };
 
 export default MyApp

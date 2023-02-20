@@ -1,0 +1,67 @@
+.header {
+    /* height: var(--headerHeight);
+    background-color: blueviolet;
+    flex: 1 100%; */
+    border: 1px solid red;
+}
+.navbarContainer {
+    display: grid;
+    grid-template-columns: 15% auto;
+    grid-template-rows: auto;
+    grid-template-areas: "logo  menu";
+}
+.navbarLeft {
+    grid-area: logo;
+    justify-self: start;
+    /*justify-items: start;*/
+}
+.navbarRight {
+    grid-area: menu;
+    justify-self: end;
+    /*justify-items: end;*/
+}
+
+.navbarLeft, .navbarRight {
+    align-self: center;
+}
+/*
+.navbarContainer:not(.navbar-transparent) {
+    background: #f8f8f8;
+}
+/* PARENT */
+/*.navbar {
+    display: flex;
+    /* position: relative; */
+    /*border: 1px solid red;
+}*/
+/* CHILDREN */
+/*.navbarLeft, .navbarRight {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;  
+}*/
+/*.navbarLeft {
+    border: 1px solid orange;
+}
+.navbarRight {
+    /*width: 45%;*/
+/*    margin-left: auto;
+    width: calc(45% - 10px);
+    border: 1px solid yellowgreen;
+}*/
+/* CHILDREN CHILDREN */
+.navbarNav {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+ul.navbarNav {
+    justify-content: space-between;
+    gap: 2rem;
+}
+.navbarRight ul.navbarNav li {
+    /*flex-basis: 300px;width: 120px;
+    flex: 1;*/
+    padding: 0.5em;  
+}

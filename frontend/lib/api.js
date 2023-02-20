@@ -33,60 +33,50 @@ export async function fetchAPI(path, urlParamsObject = {}, options = {}) {
   const requestUrl = `${getStrapiURL(
     `/api${path}${queryString ? `?${queryString}` : ""}`
   )}`;
-  //console.log('API.JS ??????????????????????????????!!! path ', path);
-  //console.log('API.JS ?????????????????????????????? requestUrl ', requestUrl);
+
   // Trigger API call
   const response = await fetch(requestUrl, mergedOptions);
-//console.log('API.JS ?????????????????????????????? ', response);
+
   // Handle response
   if (!response.ok) {
     console.error(response.statusText);
     throw new Error(`An error occured please try again`);
   }
   const data = await response.json();
-  //console.log('API.JS ?????????????????????????????? DATA ', data);
+
   return data;
 }
 
 export async function getItemBySlug(slug) {
-  
   const [postsRes] = await Promise.all([
     fetchAPI("/posts", { populate: ["featuredImage", "category"] }),
   ]);
 
   let itemId = null;
-  postsRes.data.map((post) => 
-    itemId = (post.attributes.slug === slug) && post.id
+  postsRes.data.map(
+    (post) => (itemId = post.attributes.slug === slug && post.id)
   );
-  //console.log('getItemBySlug sitemId = ', itemId);
   return itemId;
 }
 
-export  function getMenuUrl(menus, id) {
-  
-  let url = '';
-  menus.attributes.MenuTab.forEach(element => {
-    //console.log('menus.data.attributes = ', element);
-
-    if(element.id === id){
-      if(element.Name === element.page.data.attributes.Title){
-        url = element.page.data.attributes.URL;       
+export function getMenuUrl(menus, id) {
+  let url = "";
+  menus.attributes.MenuTab.forEach((element) => {
+    if (element.id === id) {
+      if (element.Name === element.page.data.attributes.Title) {
+        url = element.page.data.attributes.URL;
       }
     }
   });
   return url;
 }
 
-export  function getSubMenuUrl(menus, menu_id, sub_id) {
-
-  //console.log('menus.data.attributes = ', menus);
- 
+export function getSubMenuUrl(menus, menu_id, sub_id) {
   let url = null;
-  menus.attributes.MenuTab.forEach(element => {
-
-    if(element.id === id){
-      if(element.Name === element.page.data.attributes.Title){
-        url = element.page.data.attributes.URL;      
+  menus.attributes.MenuTab.forEach((element) => {
+    if (element.id === id) {
+      if (element.Name === element.page.data.attributes.Title) {
+        url = element.page.data.attributes.URL;
       }
     }
   });
@@ -94,16 +84,17 @@ export  function getSubMenuUrl(menus, menu_id, sub_id) {
 }
 
 export async function getMenu() {
-  
   const menusRes = await Promise.all([
-    fetchAPI("/main-menu", { 
+    fetchAPI("/main-menu", {
       populate: {
         MenuTab: { populate: "*" },
-        SubMenuItem: { populate: {
-          page: { populate: "*" },     
+        SubMenuItem: {
+          populate: {
+            page: { populate: "*" },
+          },
         },
-      } },
-    })
+      },
+    }),
   ]);
   return menusRes;
 }

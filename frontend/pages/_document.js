@@ -6,7 +6,7 @@ class MyDocument extends Document {
       <Html>
         <Head>
           {/* eslint-disable-next-line */}
-          <link
+          {/* <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Staatliches"
           />
@@ -25,7 +25,7 @@ class MyDocument extends Document {
           <script
             async
             src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.2.0/js/uikit.js"
-          />
+          />*/}
         </Head>
         <body>
           <Main />

@@ -7,13 +7,12 @@ import ReactMarkdown from 'react-markdown'; //react-markdown/with-html
 import { fetchAPI } from "../../lib/api";
 import { getStrapiMedia } from "../../lib/media";
 
-//import { getEItemById, getFeaturedItems } from '../../lib/api';
+import styles from '../../styles/Home.module.css'
 
 const Page = ({ page/*, menus*/ }) => {
-  const imageUrl = getStrapiMedia(page.attributes.featuredImage);
-  //console.log('BBBBBBBBBBBBBBBBBBB /pages/[slug].js  page = ', page);
-  //console.log('BBBBBBBBBBBBBBBBBBB /pages/[slug].js  page.attributes.SEO.shareImage = ', page.attributes.SEO.shareImage);
 
+  const imageUrl = getStrapiMedia(page.attributes.featuredImage);
+  console.log('AAAAAAAAAAAAAAAAAAAA /pages/[slug].js  imageUrl = ', imageUrl);
   const seo = {
     metaTitle: page.attributes.SEO.metaTitle,
     metaDescription: page.attributes.SEO.mataDescription,
@@ -21,25 +20,28 @@ const Page = ({ page/*, menus*/ }) => {
     page: true,
   };
   //console.log('AAAAAAAAAAAAAAAAAAAA /pages/[slug].js  seo = ', seo);
-  return (
-  
+  return ( 
       <>
       <Seo seo={seo} />
       <div
         id="banner"
-        className="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light uk-padding uk-margin"
+        /*className="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light uk-padding uk-margin"
         data-src={imageUrl}
         data-srcset={imageUrl}
+        data-uk-img*/
+        data-image-src={imageUrl}
+        src={imageUrl}
+        data-srcset={imageUrl}  
         data-uk-img
+        data-img={true}
       >
         <h1>{page.attributes.Title}</h1>
       </div>
       <h1>{page.attributes.Title}</h1>
-      <div className="uk-section">
-        <div className="uk-container uk-container-small">
+      <div className="">
           <ReactMarkdown children={page.attributes.Content}  escapeHtml={false}/>
-          <hr className="uk-divider-small" />
-          <div className="uk-grid-small uk-flex-left" data-uk-grid="true">
+          <hr className="" />
+          <div className="">
             {/*<div>
               {article.attributes.author.data.attributes.picture && (
                 <img
@@ -58,18 +60,18 @@ const Page = ({ page/*, menus*/ }) => {
                 />
               )}
             </div>*/}
-            <div className="uk-width-expand">
-              <p className="uk-margin-remove-bottom">
+            <div className="">
+              <p className="">
                 Parent {page.attributes.parent/*.data.attributes.name*/}
               </p>
-              <p className="uk-text-meta uk-margin-remove-top">
+              <p className="">
                 {/*<Moment format="MMM Do YYYY">*/ }
                   {page.attributes.URL}
                 {/*</Moment>*/}
               </p>
             </div>
           </div>
-        </div>
+     
       </div>
    
     </>

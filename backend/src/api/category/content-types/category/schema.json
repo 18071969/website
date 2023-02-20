@@ -20,15 +20,9 @@
       "type": "richtext"
     },
     "slug": {
-      "type": "string",
-      "unique": true,
+      "type": "uid",
+      "targetField": "name",
       "required": true
-    },
-    "posts": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::post.post",
-      "mappedBy": "category"
     }
   }
 }

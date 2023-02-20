@@ -41,21 +41,25 @@
         "audios"
       ]
     },
-    "admin_user": {
+    "admin_users": {
       "type": "relation",
-      "relation": "oneToOne",
+      "relation": "oneToMany",
       "target": "admin::user"
     },
-    "category": {
+    "categories": {
       "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::category.category",
-      "inversedBy": "posts"
+      "relation": "oneToMany",
+      "target": "api::category.category"
     },
     "slug": {
       "type": "uid",
       "targetField": "title",
       "required": true
+    },
+    "tags": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::tag.tag"
     }
   }
 }

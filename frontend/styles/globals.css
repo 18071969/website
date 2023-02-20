@@ -1,9 +1,37 @@
+/*@import "mixins";
+
+$color-primary: #0070f3;
+.titile a {
+  color: $color-primary;
+}
+
+@mixin background($imgpath,$position:0 0,$repeat: no-repeat) {
+    background: {
+        image: url($imgpath);
+        position: $position;
+        repeat: $repeat;
+    }
+}
+.testing {
+    @include background('/my/img/path.png');
+}*/
+
+
+/* Shared Variables */
+:root {
+  --headerHeight: 80px;
+  --middleHeight: 300px;
+  --footerHeight: 100px;
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  padding: 0 3rem;
+  font-family: 'Open Sans', 'Lato', sans-serif;
+  color: #414141;
+ 
 }
 
 a {
@@ -15,6 +43,27 @@ a {
   box-sizing: border-box;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Lato', sans-serif;
+  color: #2b2b2b;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.center {
+  margin: auto;
+  text-align: center;
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
@@ -23,4 +72,9 @@ a {
     color: white;
     background: black;
   }
+}
+
+#banner { height: 350px; display: flex; justify-content: center; 
+  align-items: center; background-size: cover; background-position: 50% 50%; background-repeat: no-repeat; 
+  border: 1px solid red; background-image: url('http://localhost:1337/uploads/header_website_042cbcc21d.png');
 }

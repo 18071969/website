@@ -1,6 +1,8 @@
 import React from "react";
 import Card from "./card";
 
+import styles from './posts.module.css';
+
 const Posts = ({ articles }) => {
 
   //console.log('POSTS COMPONENET posts %%%%%%%%%55 ', articles);
@@ -10,8 +12,7 @@ const Posts = ({ articles }) => {
 
   return (
     <div>
-      <div className="uk-child-width-1-2@s" data-uk-grid="true">
-        <div>
+        {/*<div>
           {leftArticles.map((article, i) => {
             return (
               <Card
@@ -20,8 +21,23 @@ const Posts = ({ articles }) => {
               />
             );
           })}
-        </div>
+        </div>*/}
+
         <div>
+          <div className={styles.postsWrapper}>
+            {articles.map((article, i) => {
+              return (
+                <Card
+                  article={article}
+                  key={`article__${article.attributes.slug}`}
+                />
+              );
+            })}
+          </div>
+        </div>
+
+
+        {/*<div>
           <div className="uk-child-width-1-2@m uk-grid-match" data-uk-grid>
             {rightArticles.map((article, i) => {
               return (
@@ -32,8 +48,7 @@ const Posts = ({ articles }) => {
               );
             })}
           </div>
-        </div>
-      </div>
+        </div>*/}
     </div>
   );
 };
