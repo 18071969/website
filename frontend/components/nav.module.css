@@ -3,6 +3,7 @@
     background-color: blueviolet;
     flex: 1 100%; */
     border: 1px solid red;
+    padding: 0 .5rem;
 }
 .navbarContainer {
     display: grid;

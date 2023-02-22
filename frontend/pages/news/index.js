@@ -31,8 +31,7 @@ export default function News({ posts, newspage }) {
       >
         <h1>{newspage.attributes.title}</h1>
       </div> 
-      <div className="uk-section">
-        <h1>Our News</h1>
+      <div>
         <Posts articles={posts} />
       </div>
     </>

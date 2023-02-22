@@ -29,6 +29,7 @@ body {
   padding: 0;
   margin: 0;
   padding: 0 3rem;
+  line-height: 1.5;
   font-family: 'Open Sans', 'Lato', sans-serif;
   color: #414141;
  
@@ -53,6 +54,10 @@ h6 {
   color: #2b2b2b;
 }
 
+h1 {
+  font-size: clamp(2rem, 1rem + 10vw , 5rem);
+}
+
 ul {
   list-style: none;
   margin: 0;
@@ -74,7 +79,7 @@ ul {
   }
 }
 
-#banner { height: 350px; display: flex; justify-content: center; 
+#banner { min-height: 350px; display: flex; justify-content: center; 
   align-items: center; background-size: cover; background-position: 50% 50%; background-repeat: no-repeat; 
   border: 1px solid red; background-image: url('http://localhost:1337/uploads/header_website_042cbcc21d.png');
 }

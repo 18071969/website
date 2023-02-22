@@ -6,7 +6,7 @@ import { getStrapiMedia } from "../../lib/media";
 
 const Post = ({ article/*, menus*/ }) => {
   const imageUrl = getStrapiMedia(article.attributes.featuredImage);
-  console.log('BBBBBBBBBBBBBBBBBBB pages/news/[slug].js  article = ', article);
+  //console.log('BBBBBBBBBBBBBBBBBBB pages/news/[slug].js  article = ', article);
   //console.log('BBBBBBBBBBBBBBBBBBB menus = ', menus);
   const seo = {
     metaTitle: article.attributes.title,

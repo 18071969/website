@@ -12,7 +12,7 @@ import styles from '../../styles/Home.module.css'
 const Page = ({ page/*, menus*/ }) => {
 
   const imageUrl = getStrapiMedia(page.attributes.featuredImage);
-  console.log('AAAAAAAAAAAAAAAAAAAA /pages/[slug].js  imageUrl = ', imageUrl);
+  //console.log('AAAAAAAAAAAAAAAAAAAA /pages/[slug].js  imageUrl = ', imageUrl);
   const seo = {
     metaTitle: page.attributes.SEO.metaTitle,
     metaDescription: page.attributes.SEO.mataDescription,
@@ -37,7 +37,7 @@ const Page = ({ page/*, menus*/ }) => {
       >
         <h1>{page.attributes.Title}</h1>
       </div>
-      <h1>{page.attributes.Title}</h1>
+      {/*<h1>{page.attributes.Title}</h1>*/}
       <div className="">
           <ReactMarkdown children={page.attributes.Content}  escapeHtml={false}/>
           <hr className="" />
@@ -60,16 +60,7 @@ const Page = ({ page/*, menus*/ }) => {
                 />
               )}
             </div>*/}
-            <div className="">
-              <p className="">
-                Parent {page.attributes.parent/*.data.attributes.name*/}
-              </p>
-              <p className="">
-                {/*<Moment format="MMM Do YYYY">*/ }
-                  {page.attributes.URL}
-                {/*</Moment>*/}
-              </p>
-            </div>
+          
           </div>
      
       </div>

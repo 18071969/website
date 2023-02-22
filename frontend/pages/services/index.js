@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Posts from "../../components/posts";
 import Seo from "../../components/seo";
+import ServicesSection from "../../components/servicesSection";
 import { fetchAPI } from "../../lib/api";
 import { getStrapiMedia } from "../../lib/media";
 
@@ -34,10 +35,7 @@ export default function Services({ services, servicesPage }) {
       >
         <h1>{servicesPage.attributes.title}</h1>
       </div> 
-      <div className="">
-          <h1>What We Offer</h1>
-          {/*<Posts articles={services} />*/}
-      </div>
+      <ServicesSection articles={services} />
     </>
   )
 }
