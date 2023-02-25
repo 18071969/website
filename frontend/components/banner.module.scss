@@ -1,0 +1,13 @@
+.banner {
+    min-height: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover !important;
+    background-position: 50% 50% !important;
+    background-repeat: no-repeat !important;
+    background-color:rgba(0, 0, 0, 0.5);
+    border: 1px solid red;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5));
+    h1 { color: #fff; }
+}

@@ -2,12 +2,13 @@ import Link from "next/link";
 import Seo from "../../components/seo";
 //import Layout from "../../components/layout";
 //import ReactMarkdown from 'react-markdown/with-html';
+import Banner from "../../components/banner";
 import ReactMarkdown from 'react-markdown'; //react-markdown/with-html
 
 import { fetchAPI } from "../../lib/api";
 import { getStrapiMedia } from "../../lib/media";
 
-import styles from '../../styles/Home.module.css'
+import styles from '../../styles/Home.module.scss'
 
 const Page = ({ page/*, menus*/ }) => {
 
@@ -23,20 +24,7 @@ const Page = ({ page/*, menus*/ }) => {
   return ( 
       <>
       <Seo seo={seo} />
-      <div
-        id="banner"
-        /*className="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light uk-padding uk-margin"
-        data-src={imageUrl}
-        data-srcset={imageUrl}
-        data-uk-img*/
-        data-image-src={imageUrl}
-        src={imageUrl}
-        data-srcset={imageUrl}  
-        data-uk-img
-        data-img={true}
-      >
-        <h1>{page.attributes.Title}</h1>
-      </div>
+      <Banner slogan={page.attributes.Title}  imageUrl={imageUrl} />
       {/*<h1>{page.attributes.Title}</h1>*/}
       <div className="">
           <ReactMarkdown children={page.attributes.Content}  escapeHtml={false}/>

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { getStrapiMedia } from "../lib/media";
 import Image from "next/image";
 
-import styles from "./footer.module.css";
+import styles from "./footer.module.scss";
 
 const Footer = ({ fmenus, cInfo }) => {
   //console.log('FOOTER.JS fmenus = ', fmenus);

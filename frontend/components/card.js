@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import NextImage from "./image";
 
-import styles from './card.module.css';
+import styles from './card.module.scss';
 
 const Card = ({ article }) => {
   //console.log('CARD COMPONENT ------------- ', article);

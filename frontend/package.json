@@ -9,14 +9,16 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "next": "13.1.2",
+    "cjs-loader": "^0.1.0",
+    "next": "^18.14.2",
     "qs": "^6.11.0",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-markdown": "^8.0.5"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-markdown": "^8.0.5",
+    "sass": "^1.58.3"
   },
   "devDependencies": {
     "eslint": "8.31.0",
-    "eslint-config-next": "13.1.2"
+    "eslint-config-next": "^13.1.6"
   }
 }

@@ -1,5 +1,5 @@
 import Nav from "./nav";
-import classes from "./layout.module.css";
+import classes from "./layout.module.scss";
 
 const Layout = ({ children, /*categories,*/ menus, seo }) => (
   <div className={classes.container}>   

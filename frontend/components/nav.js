@@ -4,7 +4,7 @@ import { GlobalContext } from "../pages/_app";
 import Link from "next/link";
 import Image from "./image";
 
-import classes from './nav.module.css';
+import classes from './nav.module.scss';
 
 const Nav = ({ menus }) => {
   const renderMenu = (menus) => {

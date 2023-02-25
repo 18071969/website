@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Posts from "../../components/posts";
 import Seo from "../../components/seo";
+import Banner from "../../components/banner";
 import { fetchAPI } from "../../lib/api";
 import { getStrapiMedia } from "../../lib/media";
 
@@ -16,24 +17,9 @@ export default function News({ posts, newspage }) {
   };
   return (
     <>
-      <Seo seo={seo} />     
-      <div
-        id="banner"
-        /*className="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light uk-padding uk-margin"
-        data-src={imageUrl}
-        data-srcset={imageUrl}
-        data-uk-img*/
-        data-image-src={imageUrl}
-        src={imageUrl}
-        data-srcset={imageUrl}  
-        data-uk-img
-        data-img={true}
-      >
-        <h1>{newspage.attributes.title}</h1>
-      </div> 
-      <div>
-        <Posts articles={posts} />
-      </div>
+      <Seo seo={seo} />   
+      <Banner slogan={newspage.attributes.title}  imageUrl={imageUrl} />  
+      <Posts articles={posts} />
     </>
   )
 }

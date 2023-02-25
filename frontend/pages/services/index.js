@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Posts from "../../components/posts";
 import Seo from "../../components/seo";
+import Banner from "../../components/banner";
 import ServicesSection from "../../components/servicesSection";
 import { fetchAPI } from "../../lib/api";
 import { getStrapiMedia } from "../../lib/media";
@@ -21,20 +22,7 @@ export default function Services({ services, servicesPage }) {
   return (
     <>
       <Seo seo={seo} />     
-      <div
-        id="banner"
-        /*className="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light uk-padding uk-margin"
-        data-src={imageUrl}
-        data-srcset={imageUrl}
-        data-uk-img*/
-        data-image-src={imageUrl}
-        src={imageUrl}
-        data-srcset={imageUrl}  
-        data-uk-img
-        data-img={true}
-      >
-        <h1>{servicesPage.attributes.title}</h1>
-      </div> 
+      <Banner slogan={servicesPage.attributes.title}  imageUrl={imageUrl} />  
       <ServicesSection articles={services} />
     </>
   )

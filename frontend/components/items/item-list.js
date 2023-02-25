@@ -1,5 +1,5 @@
 import Item from './item';
-import classes from './item-list.module.css';
+import classes from './item-list.scss';
 
 function ItemList(props) {
   const { items } = props;

@@ -1,7 +1,7 @@
 import React from "react";
 import Card from "./card";
 
-import styles from './posts.module.css';
+import styles from './posts.module.scss';
 
 const Posts = ({ articles }) => {
 

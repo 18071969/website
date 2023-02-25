@@ -1,5 +1,5 @@
 import Card from "./card";
-import styles from './postSelections.module.css';
+import styles from './postSelections.module.scss';
 
 const PostsSelection = ( props ) => {
     //console.log('POSTS SECTION props ))))))))))))))))))))))  ', props);

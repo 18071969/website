@@ -1,17 +1,23 @@
-import Head from "next/head";
-import Link from "next/link";
-import NextImage from "next/image";
-import Image from "next/image";
+//import Head from "next/head";
+//import Link from "next/link";
+//import NextImage from "next/image";
+//import Image from "next/image";
 import PostsSelection from "../components/postSelections";
 import ServicesSection from "../components/ServicesSection";
 import FeaturedJob from "../components/FeaturedJob";
-import Posts from "../components/posts";
+//import Posts from "../components/posts";
 import Seo from "../components/seo";
 import Button from "../components/ui/button";
+import Banner from "../components/banner";
 import { fetchAPI } from "../lib/api";
 import { getStrapiMedia } from "../lib/media";
 
-import styles from "../styles/Home.module.css";
+import styles from "../styles/Home.module.scss";
+
+/*.import {banerImage} from '../styles/_mixins.scss';
+testing {
+  @include background('/my/img/path.png');
+}*/
 
 function HomePage({ posts, /*categories, menus,*/ homepage }) {
   console.log("HOMEPAGE ============================ ", homepage);
@@ -47,7 +53,7 @@ function HomePage({ posts, /*categories, menus,*/ homepage }) {
   const imageUrl =
     "http://localhost:1337" +
     homepage.attributes.Hero.image.data[0].attributes.url;
-  //console.log(imageUrl);
+  console.log('MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM imageUrl ', imageUrl);
   const featuredPosts = homepage.attributes.postsSelection.featuredPosts;
   //console.log('HOMEPAGE ============================********************** featuredPosts ===', featuredPosts);
   const { heading } = homepage.attributes.postsSelection;
@@ -57,17 +63,22 @@ function HomePage({ posts, /*categories, menus,*/ homepage }) {
     /*className="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light uk-padding uk-margin"
   data-uk-img */
   }
-  {
-    /*@include banerImage({imageUrl}); */
-  }
+  {/*.test{ @include background({imageUrl}); }
+@include background('/my/img/path.png');*/}
+
   return (
     <>
       <Seo seo={seo} />
-      <div
+      <style global jsx>{`
+        .backgr {@include background("${imageUrl}");}
+        .bckgr { background-image:url("${imageUrl}");}
+      `}</style>
+      {/*<div
         id="banner"
+        class = "bckgr backgr"
         data-image-src={imageUrl}
         src={imageUrl}
-        data-srcset={imageUrl}
+        data-srcset={imageUrl}  
         data-uk-img
         data-img={true}
       >
@@ -75,8 +86,8 @@ function HomePage({ posts, /*categories, menus,*/ homepage }) {
         {homepage.attributes.Hero.buttons.map((button) => (
           <Button link={button.url}>{button.label}</Button>
         ))}
-      </div>
-
+      </div>*/}
+      <Banner slogan={homepage.attributes.Hero.slogan1} buttons={homepage.attributes.Hero.buttons} imageUrl={imageUrl} />
       <ServicesSection articles={servicesPreview} />
       <PostsSelection articles={featuredPosts} heading={heading} />
       <FeaturedJob jobData={featuredJob} />
@@ -148,7 +159,7 @@ export async function getStaticProps() {
       //menus: menusRes.data,
       homepage: homepageRes.data,
     },
-    revalidate: 30,
+    revalidate: 330,
   };
 }
 

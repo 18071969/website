@@ -1,4 +1,4 @@
-import '../styles/globals.css'
+//import '../styles/globals.scss'
 /*
 function MyApp({ Component, pageProps }) {
   return <Component {...pageProps} />
@@ -12,7 +12,7 @@ import { createContext } from "react";
 import { fetchAPI } from "../lib/api";
 import { getStrapiMedia } from "../lib/media";
 
-import "../styles/globals.css";
+import "../styles/globals.scss";
 
 // Store Strapi Global object in context
 export const GlobalContext = createContext({});

@@ -1,4 +1,5 @@
 import Seo from "../../components/seo";
+import Banner from "../../components/banner";
 import ReactMarkdown from 'react-markdown'; //react-markdown/with-html
 
 import { fetchAPI, getItemBySlug, getMenu } from "../../lib/api";
@@ -19,21 +20,13 @@ const Post = ({ article/*, menus*/ }) => {
   
       <>
       <Seo seo={seo} />
-      <div
-        id="banner"
-        className="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light uk-padding uk-margin"
-        data-src={imageUrl}
-        data-srcset={imageUrl}
-        data-uk-img
-      >
-        <h1>{article.attributes.title}</h1>
-      </div>
-      <div className="uk-section">
-        <div className="uk-container uk-container-small">
+      <Banner slogan={article.attributes.title}  imageUrl={imageUrl} />  
+      <div className="">
+        <div className="">
           {/*<ReactMarkdown children={article.attributes.content}  escapeHtml={false}/> */}
           {article.attributes.content}
-          <hr className="uk-divider-small" />
-          <div className="uk-grid-small uk-flex-left" data-uk-grid="true">
+          <hr className="" />
+          <div className="" >
             {/*<div>
               {article.attributes.author.data.attributes.picture && (
                 <img
@@ -52,11 +45,11 @@ const Post = ({ article/*, menus*/ }) => {
                 />
               )}
             </div>*/}
-            <div className="uk-width-expand">
-              <p className="uk-margin-remove-bottom">
+            <div className="">
+              <p className="">
                 By {article.attributes.author/*.data.attributes.name*/}
               </p>
-              <p className="uk-text-meta uk-margin-remove-top">
+              <p className="">
                 {/*<Moment format="MMM Do YYYY">*/ }
                   {article.attributes.date}
                 {/*</Moment>*/}

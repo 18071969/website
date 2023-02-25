@@ -1,4 +1,5 @@
 import Seo from "../../components/seo";
+import Banner from "../../components/banner";
 import ReactMarkdown from "react-markdown"; //react-markdown/with-html
 
 import { fetchAPI } from "../../lib/api";
@@ -18,25 +19,16 @@ const Service = ({ article /*, menus*/ }) => {
   return (
     <>
       <Seo seo={seo} />
-      <div
-        id="banner"
-        className="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light uk-padding uk-margin"
-        data-src={imageUrl}
-        data-srcset={imageUrl}
-        data-uk-img
-      >
-        <h1>{article.attributes.name}</h1>
-      </div>
-      <div className="uk-section">
-        <div className="uk-container uk-container-small">
+      <Banner slogan={article.attributes.name}  imageUrl={imageUrl} />  
+      <div className="">
           {/*console.log('JJJJJJJJJJJJJJJJJJJJJJJJ article ', article)*/}
           <ReactMarkdown
             children={article.attributes.description}
             escapeHtml={true}
           />
 
-          <hr className="uk-divider-small" />
-          <div className="uk-grid-small uk-flex-left" data-uk-grid="true">
+          <hr className="" />
+          <div className="" >
             {/*<div>
               {article.attributes.author.data.attributes.picture && (
                 <img
@@ -56,7 +48,6 @@ const Service = ({ article /*, menus*/ }) => {
               )}
             </div>*/}
           </div>
-        </div>
       </div>
     </>
   );

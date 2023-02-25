@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Image from "./image";
 import Button from "./ui/button"; 
-import styles from './servicesSection.module.css';
+import styles from './servicesSection.module.scss';
 
 const ServicesSection = ( props ) => {
     //console.log('SERVICES SECTION props ))))))))))))))))))))))  ', props);
