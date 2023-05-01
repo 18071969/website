@@ -26,7 +26,7 @@ const Service = ({ article /*, menus*/ }) => {
       <Seo seo={seo} />
       <Banner slogan={article.attributes.name}  imageUrl={imageUrl} />  
       <div className="">
-          {/*console.log('JJJJJJJJJJJJJJJJJJJJJJJJ article ', article)*/}
+          {/*console.log('JJJJJJJJJJJJJJVVVVVVVVV article ', article)*/}
           <ReactMarkdown
             children={article.attributes.description}
             escapeHtml={true}
