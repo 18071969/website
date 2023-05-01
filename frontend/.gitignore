@@ -1,0 +1,12 @@
+# local env files
+.env.local
+.env
+
+# dependencies
+/node_modules
+
+# next.js
+/.next/
+
+.cache
+.vscode

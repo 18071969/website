@@ -1,0 +1,56 @@
+/*button {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+  }
+  p {
+    margin-block: 0 1rem;
+  }
+  */
+
+  
+.form { 
+  display: flex; 
+  flex-direction: column;
+  /*flex-flow: column wrap;align-items: stretch;*/
+  border: 0px solid red;
+  justify-content: center;
+  
+  .formRow { 
+    display: flex;
+    flex-direction: column;
+    /*flex-flow: column wrap;*/
+    align-items: center;
+    padding: 10px; 
+    /*background: silver;border: 1px solid blue;*/
+      
+    input, textarea {  flex: 1;/*flex-basis: auto; width: 100%;*/  }
+  
+    .alert {  padding: .5rem}
+    .alert-success { background-color: aquamarine; }
+    .alert-danger { background-color: pink; }
+  }
+
+  .formValidationError {
+    color: red;
+    font-size:0.8rem
+  }
+  
+  .btn-send-message:disabled {
+    cursor: not-allowed;
+    background-color: #666666;
+  }
+  
+  .btn-send-message > .fa-spinner {
+    margin-right: 10px;
+  }
+
+  @media (max-width: 600px){
+    flex-direction: column;
+  }
+
+}

@@ -1,0 +1,43 @@
+{
+  "collectionName": "components_hero_titles",
+  "info": {
+    "displayName": "heroHome",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "slogan1": {
+      "type": "text"
+    },
+    "slogan2": {
+      "type": "richtext"
+    },
+    "image": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "videos"
+      ]
+    },
+    "cta": {
+      "type": "string",
+      "required": true
+    },
+    "coverImg": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "videos"
+      ]
+    },
+    "buttons": {
+      "type": "component",
+      "repeatable": true,
+      "component": "layout.link"
+    }
+  }
+}

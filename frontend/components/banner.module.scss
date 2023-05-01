@@ -1,0 +1,58 @@
+.banner {
+    min-height: 700px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    /*justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;*/
+    background-size: cover !important;
+    background-position: 50% 50% !important;
+    background-repeat: no-repeat !important;
+    background-color:rgba(0, 0, 0, 0.5);
+    border: 0px solid red;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5));
+
+    .slogan {
+        display: flex;
+        flex: 1;
+        align-items: flex-end;
+        border: 0px solid red;
+
+        h1 { color: rgba(255, 255, 255, 0.75); font-size: 50px; }
+    }
+
+    .btns{
+        display: flex;
+        flex: 1; 
+        flex-wrap: wrap;
+        align-items: center;
+        margin-right: auto;
+        border: 0px solid blue;
+
+        .btn {
+            display: flex;
+            align-content: space-around;
+            margin-right: 2rem;
+            justify-content: space-around;
+            border: 0px solid yellow;
+        }
+    }
+
+    
+    @media (max-width: 600px){
+        flex-direction: column;
+        .btns{
+            display: flex;         
+            flex-direction: column;
+            /*align-self: center;*/
+            justify-content: space-around;
+            align-items: flex-start;        
+         
+        }
+        h1 { flex: 1; margin:auto; font-size: 35px; line-height: 1.2em;}
+    }
+
+
+    
+}

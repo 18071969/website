@@ -1,0 +1,68 @@
+{
+  "kind": "singleType",
+  "collectionName": "home_pages",
+  "info": {
+    "singularName": "home-page",
+    "pluralName": "home-pages",
+    "displayName": "HomePage",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "body": {
+      "type": "richtext"
+    },
+    "SEO": {
+      "type": "component",
+      "repeatable": false,
+      "component": "seo.meta-title"
+    },
+    "Hero": {
+      "type": "component",
+      "repeatable": false,
+      "component": "hero.title"
+    },
+    "Title": {
+      "type": "string"
+    },
+    "featuredImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "servicesPreview": {
+      "displayName": "servicesPreview",
+      "type": "component",
+      "repeatable": false,
+      "component": "layout.services-preview"
+    },
+    "featuredJob": {
+      "displayName": "featuredJob",
+      "type": "component",
+      "repeatable": false,
+      "component": "layout.featured-job"
+    },
+    "postsSelection": {
+      "displayName": "postsSection",
+      "type": "component",
+      "repeatable": false,
+      "component": "blog.posts-section"
+    },
+    "dynamicHomeSection": {
+      "type": "dynamiczone",
+      "components": [
+        "layout.newsletter-form",
+        "layout.mission"
+      ]
+    }
+  }
+}

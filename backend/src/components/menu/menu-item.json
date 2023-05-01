@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_menu_menu_items",
+  "info": {
+    "displayName": "MenuItem",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Name": {
+      "type": "string",
+      "required": true
+    },
+    "page": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::page.page"
+    },
+    "SubMenuItem": {
+      "type": "component",
+      "repeatable": true,
+      "component": "menu.sub-menu-item"
+    }
+  }
+}

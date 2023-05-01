@@ -1,0 +1,12 @@
+.postsWrapper {
+    border: 1px solid red;
+    display: flex;
+    flex-direction: row;
+    /*flex-wrap: nowrap;*/
+    align-content: center;
+    /*align-items: center;*/
+    align-items: stretch;
+    justify-content: center;
+    column-gap: 4rem;
+    padding: 10rem .5rem;
+}

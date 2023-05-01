@@ -1,0 +1,22 @@
+.NavigationMenuLink[data-active] {
+  /*text-decoration: underline;*/
+  background-color: darksalmon !important;
+}
+.SubMenuLink {
+  background-color: rgb(200, 69, 203) !important;
+  border: 3px solid yellow;
+}
+/*li a[data-radix-collection-item].c-gRAcrt span[area-hidden="true"] {
+  display: block !important;
+  visibility: visible !important;
+}
+li a[data-radix-collection-item].c-gRAcrt button[data-state="open"][aria-expanded="true"] {
+  display: block !important;
+  visibility: visible !important;
+  border: 3px solid red;
+}
+li a[data-radix-collection-item].c-gRAcrt {border: 3px solid red;}
+
+.SubMenuLink > li {border: 3px solid red;display: block !important;
+  visibility: visible !important;}
+  div.c-jyCHNU { display: block !important; width: 200px !important;}*/

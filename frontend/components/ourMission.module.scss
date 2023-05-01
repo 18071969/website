@@ -1,0 +1,53 @@
+//@use '../styles/globals.scss' as globals;
+//@import '../styles/globals.scss';
+//@use '../styles/globals';
+
+.missionWrapper {
+    //border: 1px solid globals.$color-accent;
+    //border: 1px solid $color-accent;
+    display: flex;
+    flex-direction: row;
+    /*flex-wrap: nowrap;*/
+    align-content: space-between;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 4rem;
+    /*background-color: lightsteelblue;*/
+    padding: 5rem .5rem;
+
+    :global(.some-global-class) {
+        font-size: 15px;
+      }
+
+    .half {
+        /*flex-basis: 300px;*/
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        border: 0px solid green;
+        overflow-x: hidden;
+        /*transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+        transition: opacity 0.7s cubic-bezier(0.5, 0, 0, 1) 0.7s, transform 0.7s cubic-bezier(0.5, 0, 0, 1) 0.7s;*/
+
+        
+        .missionTitle{
+            border: 0px solid rgb(128, 0, 81);
+            /*padding: 6rem;
+            font-size: 70px;*/
+        }
+        .button {
+            margin: auto;
+            display: flex;
+            padding-top: 6rem;
+        }
+
+    }
+
+    @media (max-width: 600px){
+        flex-direction: column;
+    }
+    
+}

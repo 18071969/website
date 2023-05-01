@@ -1,0 +1,36 @@
+{
+  "name": "frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@formspree/react": "^2.4.1",
+    "@radix-ui/react-icons": "^1.2.0",
+    "@radix-ui/react-navigation-menu": "^1.1.1",
+    "@sendgrid/mail": "^7.7.0",
+    "@stitches/react": "^1.2.8",
+    "cjs-loader": "^0.1.0",
+    "editorjs-html": "^3.4.2",
+    "framer-motion": "^10.8.5",
+    "i18next": "^22.4.15",
+    "next": "^13.2.1",
+    "next-i18next": "^13.2.2",
+    "qs": "^6.11.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.43.5",
+    "react-i18next": "^12.2.2",
+    "react-intersection-observer": "^9.4.3",
+    "react-markdown": "^8.0.5",
+    "sass": "^1.58.3"
+  },
+  "devDependencies": {
+    "eslint": "8.31.0",
+    "eslint-config-next": "^13.2.1"
+  }
+}

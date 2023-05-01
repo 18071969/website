@@ -1,0 +1,63 @@
+.servicesWrapper {
+    border: 0px solid rgb(166, 255, 0);
+    display: flex;
+    flex-direction: row;
+    /*flex-wrap: nowrap;*/
+    align-content: center;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 3rem;
+    background-color: lightsteelblue;
+    padding: 5rem .5rem;
+    overflow-x: hidden;
+    
+    .oneThird {
+        /*flex-basis: 300px;*/   
+        display: flex;
+        flex-grow: 1; 
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        border: 0px solid green;
+        overflow-x: hidden;
+        /*overflow: hidden;*/
+
+        .servicesTitle{
+            text-align: center;
+            border: 0px solid rgb(128, 0, 81);
+        }
+    }
+    .twoThird {
+        flex-grow: 2;
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+        max-width: 70%;
+        gap: 1rem;
+        border: 0px solid pink;
+        overflow-x: hidden;
+        /*overflow: hidden;*/
+
+        @media (max-width: 600px){
+            flex-direction: column;
+            flex-grow: 1;
+            transform: none !important;
+            width: 95%;
+        }
+    }
+    .singleServ {
+        flex: 1;
+        border: 0px solid green;
+    }
+    .button { 
+        display: flex;           
+        justify-content: center;
+        width: max-content;
+    }
+
+
+    @media (max-width: 600px){
+        flex-direction: column;
+    }
+}

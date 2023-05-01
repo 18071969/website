@@ -1,0 +1,18 @@
+.cardWrapper {
+    border: 0px solid goldenrod;   
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+}
+.cardMedia {
+    border: 0px solid green;
+   
+}
+.cardBody {
+    border: 0px solid rgb(32, 32, 195);
+}
+.cardTitle{
+    border: 0px solid green;
+    flex-basis: 100%;
+}
