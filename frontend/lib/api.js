@@ -27,21 +27,21 @@ export async function fetchAPI(path, urlParamsObject = {}, options = {}) {
     },
     ...options,
   };
-
+  //console.log('fetchAPI mergedOptions === ', mergedOptions);
   // Build request URL
   const queryString = qs.stringify(urlParamsObject);
 
   const requestUrl = `${getStrapiURL(
     `/api${path}${queryString ? `?${queryString}` : ""}`
   )}`;
-
+  //console.log('fetchAPI requestUrl === ', requestUrl);
   // Trigger API call
   const response = await fetch(requestUrl, mergedOptions);
   if (!response.ok) throw new Error(`HTTP error! Status: ${response.json}`);
 
   // Handle response
   if (!response.ok) {
-    console.error(response.statusText);
+    console.error('Handle ERROR response', response.statusText);
     throw new Error(`An error occured please try again`);
   }
   const data = await response.json();

@@ -26,7 +26,7 @@ import nextI18NextConfig from '../next-i18next.config.js'
 export const GlobalContext = createContext({});
 
 const MyApp = ({ Component, pageProps }) => {
-const { global, menusPl, footerMenu, compInfo } = pageProps;
+  const { global, menusPl, footerMenu, compInfo } = pageProps;
   //console.log('GLOBAL _app.js -----global------ ', global);
   //console.log('GLOBAL _app.js -----global.attributes.Favicon------ ', global.attributes.Favicon);
   /*console.log('pageProps _app.js pageProps HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHhh pageProps ', pageProps);
@@ -56,7 +56,7 @@ const { global, menusPl, footerMenu, compInfo } = pageProps;
       <GlobalContext.Provider value={global.attributes}>
         {/*<Seo seo={seo} /> */}
         <AnimatePresence mode="wait" initial={true}>
-          <Layout>
+          <Layout pageContext>
             <Nav menus={menusPl} />
             <main><Component {...pageProps} /></main>
             <Footer fmenus={footerMenu} cInfo={compInfo} />
@@ -75,6 +75,7 @@ MyApp.getInitialProps = async (ctx) => {
   // Calls page's `getInitialProps` and fills `appProps.pageProps`
   const appProps = await App.getInitialProps(ctx);
   //console.log(' _app.js ctx ----------------------------- ', ctx);
+  //console.log(' _app.js appProps ----------------------------- ', appProps);
   // Fetch global site settings from Strapi
   const globalRes = await fetchAPI("/global", {
     populate: {
@@ -142,6 +143,9 @@ MyApp.getInitialProps = async (ctx) => {
   let footer_menu_items = [];
   footer_menu_items = footerMenu.data.attributes.items.data;
   //console.log('MENUS FOOTER _app.js footer_menu_items  ----------------------------- ', footer_menu_items );
+
+  //console.log(' _app.js ctx ----------------------------- ', ctx);
+  console.log(' _app.js appProps ----------------------------- ', appProps);
 
   // Pass the data to our page via props
   return { ...appProps, pageProps: { global: globalRes.data, /*menus: menusRes.data,*/ menusPl: main_menu_items, footerMenu: footer_menu_items, compInfo: companyInfo.data } };

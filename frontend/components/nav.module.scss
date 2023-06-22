@@ -16,13 +16,16 @@
     }    
     .navbarLeft {
         margin-right: auto;
-        border: 0px solid red;
         img {
             vertical-align: middle;
         }
     }
     .navbarLeft, .navbarRight {
         align-self: center;
+    }
+    .navbarRight {
+        display: inline-flex;
+        flex-direction: row;
     }
     @media (max-width: 600px){
         flex-direction: column;

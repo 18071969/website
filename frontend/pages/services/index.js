@@ -10,9 +10,12 @@ import nextI18NextConfig from '../../next-i18next.config.js'
 import { SSRConfig, UserConfig } from 'next-i18next';
 import { useTranslation, Trans } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { useRouter } from 'next/router'
 
-export default function Services({ services, servicesPage, servicesTr }) {
+export default function Services({ services, servicesPage, servicesTr, locale }) {
 
+  const { defaultLocale } = useRouter();
+  console.log('SERVICES PAGE defaultLocale ============================ ', defaultLocale);
   //console.log('SERVICES PAGE props ============================ ', props);
   const imageUrl = getStrapiMedia(servicesPage.attributes.coverImg);
   //console.log('SERVICES SERVICES ============================ ', services);
@@ -31,13 +34,14 @@ export default function Services({ services, servicesPage, servicesTr }) {
     <>
       <Seo seo={seo} />     
       <Banner slogan={servicesPage.attributes.title}  imageUrl={imageUrl} />  
-      <ServicesSection articles={services} />
+      <ServicesSection articles={services} locale={locale} defaultLocale={defaultLocale} />
     </>
   )
 }
 
-export async function getStaticProps({ locale = 'en' }) {
+export async function getStaticProps({ locale, locales, defaultLocale, params,/*locale = 'en'*/ }) {
   // Run API calls in parallel
+  console.log('Services page ============= params = ', params);
   console.log('Services page ============= locale = ', locale);
   //let configOverride = UserConfig;
   //const config = /*configOverride ??*/ nextI18NextConfig;
@@ -45,7 +49,12 @@ export async function getStaticProps({ locale = 'en' }) {
   //const [data_t] = await serverSideTranslations(locale, ['common', 'footer'], config );
   
   const [servicesRes, servPageRes] = await Promise.all([
-    fetchAPI("/services", { populate: ["coverImg", "tags"] }),
+    //fetchAPI("/services", { populate: ["localizations", "coverImg", "tags"] }),
+    fetchAPI("/services", { populate: {
+                              localizations: { populate: "*" },
+                              coverImg: { populate: "*" },
+                            } 
+                          }),
     fetchAPI("/services-page", {
       populate: {
         coverImg: { populate: "*" },
@@ -56,7 +65,7 @@ export async function getStaticProps({ locale = 'en' }) {
 
   //const [data_t] = await serverSideTranslations(locale, []/*, config*/ );
   //console.log('Services page ============= data_t = ', data_t);
-  //console.log('servicesRes ============= ', servicesRes);
+  console.log('servicesRes ============= ', servicesRes.data);
   //console.log('servPageRes ============= ', servPageRes);
 
   return {
@@ -65,6 +74,8 @@ export async function getStaticProps({ locale = 'en' }) {
         'common',
         'footer',
       ])),*/
+      defaultLocale: defaultLocale,
+      locale: locale,
       services: servicesRes.data,
       servicesPage: servPageRes.data,
       //servicesTr: data_t.data,
