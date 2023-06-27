@@ -2,7 +2,7 @@ import React from "react";
 import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../pages/_app";
 import { useRouter } from 'next/router';
-import { formatSlug, getSlug, getLocalizedPaths } from '../lib/localize-helpers';
+import { formatSlug, getSlug, getLocalizedPaths, getSlashInPath } from '../lib/localize-helpers';
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import Link from "next/link";
 import Image from "./image";
@@ -20,115 +20,128 @@ const Nav = ({ menus, pageContext }) => {
   console.log('NAV COMPONENT POUTER === ', router);
   console.log('NAV COMPONENT PAGE-CONTEXT   BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB ', pageContext);
   //getLocalizedPaths
-  async function getArticlesRes () { 
+
+  const getCollection = () => {
+    
+    let test_str = router.asPath;
+    let collection = '';
+    let start_pos = test_str.indexOf('/') + 1;
+    let end_pos = test_str.indexOf('/',start_pos);
+    console.log("NAV COMPONENT getCollection start_pos === ", start_pos);
+    console.log("NAV COMPONENT getCollection end_pos === ", end_pos);
+    console.log("NAV COMPONENT getCollection test_str.substring(start_pos) === ", test_str.substring(start_pos));
+    (end_pos !== -1) ? collection = test_str.substring(start_pos,end_pos) : collection = test_str.substring(start_pos);
+    return collection;
+  }
+
+  async function getLocalizations() { 
     //const router = useRouter();
     let locale = router.locale;
     let slug = getSlug(router.asPath).toString();
-    console.log("NAV COMPONENT getArticlesRes query/services?locale="+locale+"&filters[slug]="+slug+"&populate[0]=coverImg"+"&populate[1]=tags"+"&populate[2]=localizations");
-    const articlesRes = await fetchAPI("/services?locale="+locale+"&filters[slug]="+slug+"&populate[0]=coverImg"+"&populate[1]=tags"+"&populate[2]=localizations", {
-  
+    console.log("NAV COMPONENT getLocalizations SLUG === ", slug);
+    let collection = getCollection();
+
+    //console.log("NAV COMPONENT getLocalizations query/"+collection+"?locale="+locale+"&filters[slug]="+slug+"&populate[0]=localizations");
+    //console.log("NAV COMPONENT getLocalizations query/services?locale="+locale+"&filters[slug]="+slug+"&populate[0]=coverImg"+"&populate[1]=tags"+"&populate[2]=localizations");
+    console.log("NAV COMPONENT getLocalizations COLLECTION === ", collection);
+    console.log("NAV COMPONENT getLocalizations QUERY === "+ "/"+collection+"?locale="+locale+"&filters[slug]="+slug+"&populate[0]=localizations");
+    console.log("NAV COMPONENT getLocalizations QUERY333 === /services-page?locale="+locale+"&filters[slug]="+slug+"&populate[0]=localizations");
+    const articlesRes = await fetchAPI("/"+collection+"?locale="+locale+"&filters[slug]="+slug+"&populate[0]=localizations", {
+    
     });
     
     if (!articlesRes) {
-      console.log('NAV COMPONENT PAGE getArticlesRes ===  if (!articlesRes) ');
+      console.log('NAV COMPONENT PAGE getLocalizations ===  if (!articlesRes) ');
       return {
         notFound: true,
       }
     } 
-    console.log('NAV COMPONENT getArticlesRes articlesRes  BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB ', articlesRes);
-    let localizations = await articlesRes.data[0].attributes.localizations.data;
-    console.log('NAV COMPONENT getArticlesRes articlesRes  BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB localizations === ', localizations);
+    console.log('NAV COMPONENT getLocalizations articlesRes  BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB ', articlesRes);
+    console.log('NAV COMPONENT getLocalizations articlesRes  LENGHT BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB ', articlesRes.data.length);
+    console.log('NAV COMPONENT getLocalizations articlesRes  articlesRes.data BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB ', articlesRes.data);
+    let paths, localizations = [];
+    if(articlesRes.data.length === 0) {
+      locales.map(loc =>{
+        let path = formatSlug(collection, loc, defaultLocale);
+        console.log('NAV COMPONENT getLocalizations articlesRes  formatSlug(collection, loc, defaultLocale) BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB ', formatSlug(collection, loc, defaultLocale));
+        paths.push(path);
+      })
+      localizations.push.paths;
+      console.log('NAV COMPONENT getLocalizations articlesRes  paths 111 BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB ', paths);
+      //localizations = await articlesRes.data.attributes.localizations.data;
+
+    } else localizations = await articlesRes.data[0].attributes.localizations.data;
+    console.log('NAV COMPONENT getLocalizations articlesRes  BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB localizations === ', localizations);
     
     return localizations;
   }
-  
-/*
-const localizations2 = getArticlesRes().then(function(result) {
-  //console.log('NAV COMPONENT getArticlesRes localizations2 RESULT === ', result);
-  //alert('Resolved');
-  return result;
-}).then(function(data) {
-  //console.log('NAV COMPONENT getArticlesRes localizations2 DATA === ', data);
-  const items = data;
-  //console.log('NAV COMPONENT getArticlesRes localizations2 ITEMS === ', items);
-  //var userid = JSON.parse(data);
-  //console.log(userid);
-  return items;
-}).catch(function(error) {
-  //alert('Rejected');
-  //console.log('NAV COMPONENT getArticlesRes localizations2 error === ', error);
-}).finally(function(result) {
-  //alert('Settled');
-  //console.log('NAV COMPONENT getArticlesRes localizations2 FINALY ================= ', result);
-  //return steps;
-})*/
 
-const [localizations, setLocalizations] = useState([]);
+  const [localizations, setLocalizations] = useState([]);
+  const [localizedPaths, setlocalizedPaths] = useState([]);
 
-useEffect(() => {
-  console.log('NAV COMPONENT USE EFFECT START localizations === ');
-  let localizations = (async() => {
-    const localizations3 = await getArticlesRes(); 
-    //console.log('NAV COMPONENT localizations3 === ', localizations3);
-    setLocalizations(localizations3);
-    //return localizations3;
-  })();
-  console.log('NAV COMPONENT USE EFFECT localizations === ', localizations);
-}, [locale, router, pageContext]);
+  useEffect(() => {
+    console.log('NAV COMPONENT USE EFFECT START localizations === ');
+    let localizations = (async() => {
+      if(getSlashInPath(router.asPath) > 1){
+        const localizations3 = await getLocalizations(); 
+        //console.log('NAV COMPONENT localizations3 === ', localizations3);
+        setLocalizations(localizations3);
+      } else {
+        setLocalizations([]);
+        
+      }
+    })();
+      let localizedPaths = [];
+      if(getSlashInPath(router.asPath) > 1) {
+        setlocalizedPaths(localizedPaths);
+      } else { 
+        let collection = getCollection();
+        locales.map(loc =>{
+          console.log('NAV COMPONENT USE EFFECT =============  LOC ===  ', loc);
+          let path = formatSlug(collection, loc, defaultLocale);
+          console.log('NAV COMPONENT USE EFFECT =============  formatSlug(collection, loc, defaultLocale)', path);
+          localizedPaths.push({ locale: loc, href: path });    
+        })
+        setlocalizedPaths(localizedPaths);
+        console.log('NAV COMPONENT USE EFFECT =============  localizedPaths  ', localizedPaths);
+      };
+      
+  }, [locale, router, pageContext]);
 
-let page = pageContext
+  let page = pageContext
       ? pageContext
       : {
-            // if there is no pageContext because it is SSR page or non-CMS page
-            // the following is from useRouter and is used for non-translated, non-localized routes
             locale, // current locale
             locales, // locales provided by next.config.js
             defaultLocale, // en = defaultLocale
-            //slug: formatSlug(asPath.slice(1), locale, defaultLocale), // slice(1) because asPath includes /
             slug: getSlug(router.asPath).toString(),
-            /*localizations: getArticlesRes().then(function(result) {
-              return result;
-            }),
-            localizations: getArticlesRes().then((res)=>console.log(res)),*/
-            //localizations2: localizations2.then((res)=>{return(res)}).then((data)=>{const items = data; return(items)}),/**/
-            localizations: localizations,
-            /*localizations3: (async() => {
-              const localizations3 = await getArticlesRes().then((res)=>{return(res)}).then((data)=>{const items = data; return(items)}); // This is async.
-              return localizations3 + 1;
-            })(),
-
-            localizations4: (async () => {
-              const result = await Promise.resolve(getArticlesRes().then((res)=>{return(res)}).then((data)=>{const items = data; return(items)}))
-              //console.log('??????????????????????????????????????????????????????? localizations4 RESULT = ', result,'Promise === ',  result.Promise.map(a => {console.log(a)}))
-              //result.Promise.PromiseResult.map(a => {console.log('??????????????????????????????????????????????????????? localizations4 RESULT PromiseResult = ', a); return a})
-              return result
-            })(),*/
-            /*localizedPaths: locales.map((loc) => ({
-                // creates an array of non-translated routes such as /normal-page /es/normal-page /de/normal-page. Will make more sense when we implement the LocaleSwitcher Component
-                locale: loc,
-                href: formatSlug(asPath.slice(1), loc, defaultLocale),
-            })),*/
-        
+            localizations: localizations,   
+            localizedPaths: localizedPaths,     
         };
-        console.log('NAV COMPONENT PAGE SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS === ', page);      
-        const localizedPaths = getLocalizedPaths({ ...page }).map((path) => {
-          let arr = path.href.split('');  
-          const index = arr.lastIndexOf('/') + 1; 
-          arr.splice(index, 0, 'services/').join('');    
-          path.href = arr.join('');   
-          return path;
-        }); 
-        
-        page = {
-          ...page,
-          localizedPaths,
-        };
+        console.log('NAV COMPONENT PAGE SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS === ', page);     
+        if(getSlashInPath(router.asPath) > 1) { 
+          const localizedPaths = getLocalizedPaths({ ...page }).map((path) => {
+            console.log('NAV COMPONENT PAGE RETURN  before PATH === ', path);
+            let arr = path.href.split('');  
+            const index = arr.lastIndexOf('/') + 1; 
+            console.log('NAV COMPONENT PAGE SSSSSSSSSSSSSSrouter.asPath.replace === ', router.asPath.replace(/[^/]/g, "").length);  
+            let collection = getCollection();
+            if(router.asPath.replace(/[^/]/g, "").length > 1) arr.splice(index, 0, ''+collection+'/').join('');
+            path.href = arr.join('');   
+            console.log('NAV COMPONENT PAGE RETURN after PATH === ', path);
+            return path;
+          }); 
+          page = {
+            ...page,
+            localizedPaths,
+          };
+        }
         console.log('NAV COMPONENT pageContext === ', pageContext);
         console.log('NAV COMPONENT PAGE === ', page);
         console.log('NAV COMPONENT localizedPaths === ', localizedPaths);
 
- const { Favicon } = useContext(GlobalContext);
-//console.log('NAV.JS  -----Favicon------ ', Favicon);
+  const { Favicon } = useContext(GlobalContext);
+  //console.log('NAV.JS  -----Favicon------ ', Favicon);
 
   return (
     <nav className={`${classes.navbarContainer} ${classes.navbar}`}>
@@ -142,7 +155,7 @@ let page = pageContext
       <div className={classes.navbarRight}>
         {/*<MenuLink menus={menus} />*/}
         <NavigationMenuDemo menus={menus} />
-        <LanguageSwitcher pageContext={page} />
+        <LanguageSwitcher pageContext={page}  />
       </div>
     </nav>    
   );

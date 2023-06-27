@@ -8,6 +8,11 @@ export function getSlug (href, locale, defaultLocale) {
     //if(locale === defaultLocale) {`/${slug}`} else {`/${locale}/${slug}`};
 }
 
+export function getSlashInPath (href) {
+    console.log('localize-helpers.js $$$$$$$$$$$$$$$$$$$$ GET-SLASH in path href  ===', (href.split("/").length - 1));
+    return (href.split("/").length - 1);
+}
+
 export const formatSlug = (slug, locale, defaultLocale) => {
     console.log('localize-helpers.js $$$$$$$$$$$$$$$$$$$$ formatSlug slug === ', slug);
     return locale === defaultLocale ? `/${slug}` : `/${locale}/${slug}`; // if locale DOES NOT equal defaultLocale - en - it prepends the locale i.e /es/ or /de/

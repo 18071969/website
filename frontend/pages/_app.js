@@ -57,7 +57,7 @@ const MyApp = ({ Component, pageProps }) => {
         {/*<Seo seo={seo} /> */}
         <AnimatePresence mode="wait" initial={true}>
           <Layout pageContext>
-            <Nav menus={menusPl} />
+             <Nav menus={menusPl} />{/**/}
             <main><Component {...pageProps} /></main>
             <Footer fmenus={footerMenu} cInfo={compInfo} />
           </Layout>
