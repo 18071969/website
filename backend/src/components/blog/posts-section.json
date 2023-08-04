@@ -22,6 +22,11 @@
         "latest",
         "tag"
       ]
+    },
+    "featuredServices": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::service.service"
     }
   }
 }

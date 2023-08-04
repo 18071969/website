@@ -29,7 +29,7 @@ function HomePage({ posts, /*categories, menus,*/ homepage }) {
   //console.log('HOMEPAGE ============================ homepage.attributes.servicesPreview.services.data ===', homepage.attributes.servicesPreview.services.data);
   //console.log('HOMEPAGE ============================ homepage.attributes.servicesPreview.services.data ===', homepage.attributes.servicesPreview.services.data);
   //console.log('HOMEPAGE ============================ homepage.attributes.postsSelection ===', homepage.attributes.postsSelection);
-  //console.log('HOMEPAGE ============================ homepage.attributes.postsSelection.featuredPosts ===', homepage.attributes.postsSelection.featuredPosts);
+  console.log('HOMEPAGE ============================ homepage.attributes.postsSelection.featuredPosts ===', homepage.attributes.postsSelection.featuredPosts);
 
   /*console.log(
     "HOMEPAGE ============================ homepage.attributes.featuredJob ===",
@@ -70,7 +70,8 @@ function HomePage({ posts, /*categories, menus,*/ homepage }) {
   //console.log('HOMEPAGE ============================********************** featuredPosts ===', featuredPosts);
   const { heading } = homepage.attributes.postsSelection;
   //console.log('HOMEPAGE ============================ heading ===', heading);
-  const servicesPreview = homepage.attributes.servicesPreview.services.data;
+  const servicesPreview = homepage.attributes.servicesPreview;  //.services.data;
+  console.log('HOMEPAGE ============================ servicesPreview homepage.attributes.servicesPreview ===', homepage.attributes.servicesPreview);
   {
     /*className="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light uk-padding uk-margin"
   data-uk-img */
@@ -101,7 +102,7 @@ function HomePage({ posts, /*categories, menus,*/ homepage }) {
       </div>*/}
       {homepage.attributes.Hero && <Banner slogan={homepage.attributes.Hero.slogan1} buttons={homepage.attributes.Hero.buttons} imageUrl={imageUrl} />}
       {ourMission && <OurMission heading={ourMission.heading} content={ourMission.content} showLogo={ourMission.showLogo} image={ourMission.image} />}
-      {servicesPreview && <ServicesSection articles={servicesPreview} />}
+      {servicesPreview && <ServicesSection articles={servicesPreview.services.data} title={servicesPreview.sectionTitle} />}
       {featuredPosts && <PostsSelection articles={featuredPosts} heading={heading} />}
       {featuredJob && <FeaturedJob jobData={featuredJob} />/**/}
       {newsletter && <Newsletter heading={newsletter.heading} subHeading={newsletter.subHeading} image={newsletter.image} />}

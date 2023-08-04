@@ -5,7 +5,7 @@ import Image from "./image";
 import styles from './card.module.scss';
 
 const Card = ({ article }) => {
-  //console.log('CARD COMPONENT ------------- ', article);
+  console.log('CARD COMPONENT ------------- ', article);
  
   //console.log('CARD COMPONENT article.attributes.featuredImage ------------- ', article.attributes.featuredImage);
   let categories = [];

@@ -1,7 +1,8 @@
 {
   "collectionName": "components_layout_services_previews",
   "info": {
-    "displayName": "servicesPreview"
+    "displayName": "servicesPreview",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -9,6 +10,10 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::service.service"
+    },
+    "sectionTitle": {
+      "type": "string",
+      "default": "What We Offer"
     }
   }
 }

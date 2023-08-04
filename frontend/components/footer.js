@@ -2,8 +2,8 @@ import React from "react";
 import Link from "next/link";
 import { getStrapiMedia } from "../lib/media";
 import Image from "next/image";
-
 import styles from "./footer.module.scss";
+import ScrollToTopButton from "./ScrollToTopButton";
 
 const Footer = ({ fmenus, cInfo }) => {
   //console.log('FOOTER.JS fmenus = ', fmenus);
@@ -36,6 +36,7 @@ const Footer = ({ fmenus, cInfo }) => {
       </div>
       <div className={styles.footer3}>
         <ul className="uk-navbar-nav">{renderMenu(fmenus)}</ul>
+        <ScrollToTopButton />
       </div>
     </div>
   );

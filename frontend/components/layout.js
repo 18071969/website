@@ -40,7 +40,7 @@ const Layout = ({ children, seo, pageContext }) => {
       damping: 20,
     }}
     className={styles.layout}>   
-      {children} 
+      {children}
   </motion.div>
   )
 };

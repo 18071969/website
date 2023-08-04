@@ -41,7 +41,7 @@
         }
       }
     },
-    "services": {
+    "servicesPreview": {
       "type": "component",
       "repeatable": false,
       "component": "blog.posts-section",

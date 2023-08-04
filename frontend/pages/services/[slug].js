@@ -136,7 +136,7 @@ export async function getStaticProps( context, params/**/ ) {
   };
 }
 
-export async function getStaticPaths({ locales }) {
+export async function getStaticPaths({ locales, defaultLocale }) {
 
   const articlesRes = await fetchAPI("/services", { fields: ["slug", "locale"], populate: {localizations: "*"} });
               const services = articlesRes.data;
@@ -151,12 +151,12 @@ export async function getStaticPaths({ locales }) {
                   (
                     (page.attributes.localizations && page.attributes.localizations.data.length) ?
                       (                  
-                        (locale === 'en') && paths.push({
+                        (locale === defaultLocale) && paths.push({
                           params: {
                             id: page.id,
                             slug: page.attributes.slug.toString(),
                           },
-                          locale: 'en',
+                          locale: defaultLocale,
                         }),
                         page.attributes.localizations?.data.map((item, key) => {
                           (item.attributes.locale === locale) &&           

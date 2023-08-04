@@ -78,6 +78,7 @@ const Nav = ({ menus, pageContext }) => {
 
   const [localizations, setLocalizations] = useState([]);
   const [localizedPaths, setlocalizedPaths] = useState([]);
+  //const [localeMenu, setLocaleMenu] = useState([]);
 
   useEffect(() => {
     console.log('NAV COMPONENT USE EFFECT START localizations === ');
@@ -154,7 +155,7 @@ const Nav = ({ menus, pageContext }) => {
       </div>
       <div className={classes.navbarRight}>
         {/*<MenuLink menus={menus} />*/}
-        <NavigationMenuDemo menus={menus} />
+        <NavigationMenuDemo menus={menus} locale={locale}/>
         <LanguageSwitcher pageContext={page}  />
       </div>
     </nav>    
