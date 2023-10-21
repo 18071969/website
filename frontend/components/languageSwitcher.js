@@ -12,6 +12,8 @@ export default function LanguageSwitcher({ pageContext }) {
     const [active, toggleActive] = useState(false);
     const [locale, setLocale] = useState();
 
+    console.log('################################ LANGUAGES MENU  pageContextLanguageSwitcher pageContext=== ', pageContext);
+
     const handleLocaleChange = async (selectedLocale) => {
         Cookies.set('NEXT_LOCALE', selectedLocale); // set the out-of-the-box Next cookie 'NEXT_LOCALE'
         setLocale(selectedLocale);
@@ -21,6 +23,7 @@ export default function LanguageSwitcher({ pageContext }) {
 
     useEffect(() => {
         const localeCookie = Cookies.get('NEXT_LOCALE');
+        console.log('LANGUAGES MENU useEffect localeCookie === ', localeCookie);
         if (!localeCookie) {
             // if there is no NEXT_LOCALE cookie set it to the router.locale
             handleLocaleChangeRef.current(router.locale);
@@ -34,7 +37,11 @@ export default function LanguageSwitcher({ pageContext }) {
                 localeCookie !== pageContext.locale
             ) {
                 // For example if localeCookie = 'es' and user lands on /de/erste-seite, it will call getLocalizedPage with 'es' and pageContext
-                console.log('LANGUAGES MENU checkLocaleMismatch pageContext === ', pageContext);
+                console.log('111 LANGUAGES MENU checkLocaleMismatch pageContext === ', pageContext);
+                console.log('LANGUAGES MENU checkLocaleMismatch IF !isMounted.current === ', !isMounted.current);
+                console.log('LANGUAGES MENU checkLocaleMismatch IF isMounted.current === ', isMounted.current);
+                console.log('LANGUAGES MENU checkLocaleMismatch IF localeCookie === ', localeCookie);
+                console.log('LANGUAGES MENU checkLocaleMismatch IF pageContext.locale === ', pageContext.locale);
                 /*const localePage = await getLocalizedPage(
                     localeCookie,
                     pageContext
@@ -49,11 +56,26 @@ export default function LanguageSwitcher({ pageContext }) {
                     // we need to include the 'as' href otherwise the router will try to redirect to /es/[[...slug]]]
                 );*/
             } else {
-                console.log('LANGUAGES MENU checkLocaleMismatch ELSE pageContext === ', pageContext);
+                console.log('222 LANGUAGES MENU checkLocaleMismatch ELSE pageContext === ', pageContext);
+                console.log('LANGUAGES MENU checkLocaleMismatch ELSE isMounted === ', isMounted);
                 console.log('LANGUAGES MENU checkLocaleMismatch ELSE !isMounted.current === ', !isMounted.current);
                 console.log('LANGUAGES MENU checkLocaleMismatch ELSE isMounted.current === ', isMounted.current);
                 console.log('LANGUAGES MENU checkLocaleMismatch ELSE localeCookie === ', localeCookie);
                 console.log('LANGUAGES MENU checkLocaleMismatch ELSE pageContext.locale === ', pageContext.locale);
+
+                /*const localePage = await getLocalizedPage(
+                    localeCookie,
+                    pageContext
+                ); // we then fetch the correct localized page
+                console.log('LANGUAGES MENU checkLocaleMismatch localePage === ', localePage);
+                // object assign overrides locale, localizations, slug
+                router.push(
+                    // router.push the correct page which is /es/primera-pagina
+                    `${localizePath({ ...pageContext, ...localePage })}`, //url
+                    `${localizePath({ ...pageContext, ...localePage })}`, // as
+                    { locale: localePage.locale } // options
+                    // we need to include the 'as' href otherwise the router will try to redirect to /es/[[...slug]]]
+                );*/
             }
         };
 
@@ -66,6 +88,7 @@ export default function LanguageSwitcher({ pageContext }) {
         };
     }, [locale, router, pageContext]); // called again if locale, router or pageContext change
 console.log('LANGUAGES MENU pageContext === ', pageContext);
+let i = 0;
     return (
         <div className={styles.navbar_end}>
             <div className={styles.navbar_item}>
@@ -83,8 +106,12 @@ console.log('LANGUAGES MENU pageContext === ', pageContext);
                     {/*</div>*/}
                     <div className={styles.dropdown_menu} id='dropdown_menu3' role='menu'>
                         <div className={styles.dropdown_content}>
+                            {console.log('HREF LANGUAGES SWITCHER pageContext.localizedPaths =================== ', pageContext.localizedPaths)},
+                            {console.log('HREF LANGUAGES SWITCHER pageContext.localizedPaths.LENGHT =================== ', pageContext.localizedPaths.length)},
                             {pageContext.localizedPaths &&
                                 pageContext.localizedPaths.map(({ href, locale }) => (
+                                    i++,
+                                    console.log('HREF LANGUAGES SWITCHER =================== III === ', i, ' href === ', href, ' LOCALE === ', locale),
                                     <Link
                                         href={href}
                                         locale={locale}

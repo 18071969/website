@@ -19,6 +19,8 @@ const nextConfig = {
     includePaths: [path.join(__dirname, 'styles')],
   },
   i18n,
+  //fs: false,
+  //path: false
 }
 
 module.exports = nextConfig

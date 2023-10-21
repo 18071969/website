@@ -140,6 +140,9 @@ MyApp.getInitialProps = async (ctx/*, Component*/) => {
     },
   });
   //console.log('MENUS  _app.js mainMenu.data ----------------------------- ', mainMenu.data);
+  //console.log('MENUS  _app.js mainMenu.data.attributes.items.data ----------------------------- ', mainMenu.data.attributes.items.data);
+  //console.log('MENUS  _app.js mainMenu.data.attributes.items ----------------------------- ', mainMenu.data.attributes.items);
+
   let main_menu_items = [];
   main_menu_items = mainMenu.data.attributes.items.data;
   

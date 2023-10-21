@@ -15,10 +15,10 @@ const FeaturedJob = ( props ) => {
     const {heading, announcement, job} = props.jobData;
     //console.log('FEATURED-JOB SECTION job ))))))))))))))))))))))  ', job);    
     //console.log('FEATURED-JOB SECTION heading ))))))))))))))))))))))  ', heading);
-    let desc = job.data.attributes.description;
-    const slug = job.data.attributes.slug;
+    let desc = job.data?.attributes.description;
+    const slug = job.data?.attributes.slug;
     //console.log('FEATURED-JOB SECTION slug ))))))))))))))))))))))  ', slug);
-    const images = job.data.attributes.images;
+    const images = job.data?.attributes.images;
     //console.log('FEATURED-JOB SECTION images ))))))))))))))))))))))  ', images);
     let imgStyle = { /*maxWith: 'fit-content',height:'450px'*/ maxWidth:'450px'}
 

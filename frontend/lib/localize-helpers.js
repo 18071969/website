@@ -9,20 +9,23 @@ export function getSlug (href, locale, defaultLocale) {
 }
 
 export function getSlashInPath (href) {
-    console.log('localize-helpers.js $$$$$$$$$$$$$$$$$$$$ GET-SLASH in path href  ===', (href.split("/").length - 1));
+   // console.log('localize-helpers.js $$$$$$$$$$$$$$$$$$$$ GET-SLASH in path href  ===', href);
+   //console.log('localize-helpers.js $$$$$$$$$$$$$$$$$$$$ GET-SLASH in path (href.split("/").length - 1)  ===', (href.split("/").length - 1));
     return (href.split("/").length - 1);
 }
 
 export const formatSlug = (slug, locale, defaultLocale) => {
     console.log('localize-helpers.js $$$$$$$$$$$$$$$$$$$$ formatSlug slug === ', slug);
-    return locale === defaultLocale ? `/${slug}` : `/${locale}/${slug}`; // if locale DOES NOT equal defaultLocale - en - it prepends the locale i.e /es/ or /de/
+    let slug_temp = slug ? slug : '/';
+    console.log('localize-helpers.js $$$$$$$$$$$$$$$$$$$$ formatSlug slug_temp === ', slug_temp);
+    return locale === defaultLocale ? `/${slug_temp}` : `/${locale}/${slug_temp}`; // if locale DOES NOT equal defaultLocale - en - it prepends the locale i.e /es/ or /de/
 }
 
 export const getLocalizedPaths = (pageContext) => {
 
     const { locales, defaultLocale, localizations, slug, locale } = pageContext;
     console.log('localize-helpers.js $$$$$$$$$$$$$$$$$$$$ GET-LOCALIZED-PATHS pageContext === ', pageContext);
-
+    console.log('localize-helpers.js $$$$$$$$$$$$$$$$$$$$ GET-LOCALIZED-PATHS localizations === ', localizations);
 
     const paths = locales.map((locale) => {
         // map through all locales enabled in next.config.js ['en', 'es', 'de']
@@ -42,7 +45,7 @@ export const getLocalizedPaths = (pageContext) => {
 
     localizations && localizations.map((localization) => {
         let slug = localization.attributes.slug;
-        let locale = localization.attributes.locale;
+        let locale = (localization.attributes.locale == 'null') ? false : localization.attributes.locale;
         console.log('$$$$$$$$$$$$$$$$$$$$ GET-LOCALIZED-PATHS MAP SLUG === ', slug, 'LOCALE === ', locale);
         localizePath({ ...pageContext, locale, slug });    
         return (
@@ -105,30 +108,37 @@ export const getLocalizedPage = async (targetLocale, pageContext) => {
     console.log("GET LOCALIZED PAGE targetLocale === ", targetLocale);
     console.log("GET LOCALIZED PAGE pageContext === ", pageContext);
     const localization = pageContext.localizations.find(
-        (localization) => localization.locale === targetLocale
+        (localization) => localization.attributes.locale === targetLocale
     );
     
     console.log("GET LOCALIZED PAGE localization === ", localization);
 
     //const articlesRes = await fetchAPI("/services", { fields: ["slug", "locale"], populate: {localizations: "*"} });
     //const services = articlesRes.data;
-    if (localization) {const { data } = await fetchAPI("/services?id="+localization.id, {
-        filters: {
-          slug: params.slug,
-          name,
-          description,
-          locale,
-          localizations: 
-            id,
-            slug,
-            locale
-        },
-        //populate: ["featuredImage", "category", "author.picture"],
-        populate: {
-            coverImg: { populate: "*" },
-            tags: { populate: "*" },
-          },
-      });
+    //const { data } = null;
+    const { data } = await fetchAPI("/pages?id="+localization.id+"&filters[slug]="+params.slug+"&populate[0]=featuredImage"+"&populate[1]=SEO"+"&populate[2]=SEO.shareImage"+"&populate[3]=localizations", {
+    },
+    //(localization) && (
+
+        
+        /*const { data } = await fetchAPI("/pages?id="+localization.id, {
+            filters: {
+            slug: params.slug,
+            Title,
+            Content,
+            locale,
+            localizations: 
+                id,
+                slug,
+                locale
+            },
+            //populate: ["featuredImage", "category", "author.picture"],
+            populate: {
+                featuredImage: { populate: "*" },
+                SEO: { populate: "*" },
+            },
+        });*/
+      console.log("GET LOCALIZED PAGE data === ", data),
     
     /*const { data } = await client.query({
         query: gql`
@@ -151,6 +161,6 @@ export const getLocalizedPage = async (targetLocale, pageContext) => {
         },
     });*/
 
-    return data.page;
-} else return;
+        //return data.page;
+    )
 };

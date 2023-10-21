@@ -23,12 +23,13 @@ const Layout = ({ children, seo, pageContext }) => {
             })),
         };
 
-  console.log('LAYOUT COMPONENT pageContext === ', pageContext);
+  
   console.log('LAYOUT COMPONENT PAGE === ', page);
   
   const temp = getLocalizedPaths(page);
   console.log('LAYOUT COMPONENT getLocalizedPaths(page) === ', temp);
 */
+console.log('LAYOUT COMPONENT pageContext === ', pageContext);
   return (
   <motion.div 
     initial={{ x: 300, opacity: 0 }}

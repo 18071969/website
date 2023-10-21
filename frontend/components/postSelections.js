@@ -35,7 +35,7 @@ const PostsSelection = ( props ) => {
             <motion.div className={styles.itemsWrapper}
                         animate={animation}>
             {articles.data && articles.data.map((article) => {
-                console.log('POSTS SECTION posts_section article.attributes ))))))))))))))))))))))  ',article.attributes);
+                //console.log('POSTS SECTION posts_section article.attributes ))))))))))))))))))))))  ',article.attributes);
             return (
               <Card className={styles.items}
                 article={article}
