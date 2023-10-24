@@ -1,13 +1,19 @@
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+
 import Seo from "../../components/seo";
 import Banner from "../../components/banner";
 import ReactMarkdown from 'react-markdown'; //react-markdown/with-html
 
-import { fetchAPI, getItemBySlug, getMenu } from "../../lib/api";
+import { fetchAPI } from "../../lib/api";
 import { getStrapiMedia } from "../../lib/media";
+import { getLocalizedPaths } from '../../lib/localize-helpers';
 
 const Post = ({ article/*, menus*/ }) => {
+  const { t } = useTranslation(['common', 'second-page'])
   const imageUrl = getStrapiMedia(article.attributes.featuredImage);
-  //console.log('BBBBBBBBBBBBBBBBBBB pages/news/[slug].js  article = ', article);
+  console.log('BBBBBBBBBBBBBBBBBBB pages/news/[slug].js  imageUrl = ', imageUrl);
+  console.log('BBBBBBBBBBBBBBBBBBB pages/news/[slug].js  article = ', article);
   //console.log('BBBBBBBBBBBBBBBBBBB menus = ', menus);
   const seo = {
     metaTitle: article.attributes.title,
@@ -79,34 +85,132 @@ export async function getStaticProps(context) {
 
 }*/
 
-export async function getStaticProps({ params }) {
+//export async function getStaticProps({ context, paths, params/*, ctx, router*/ }) { //
+//export async function getStaticProps({ params }){
+export async function getStaticProps({ params, locale, locales, defaultLocale }){
 
-  /*const menusRes = await fetchAPI("/main-menu", { 
-    populate: {
-      MenuTab: { populate: "*" },
-      SubMenuItem: { populate: {
-        page: { populate: "*" },
-      },
-    } },
-  }); console.log('GGGGGGGGGGGGGGGGGGGGGGGGGGGG ', menusRes);*/
+  //const { req } = ctx;  console.log('JJJJJJJJJJJJJJJJJJJJJJJJ getStaticProps req ', req);
+  //const { locale } = router;  console.log('JJJJJJJJJJJJJJJJJJJJJJJJ getStaticProps locale ', locale);
+  //console.log('JJJJJJJJJJJJJJJJJJJJJJJJ getStaticProps paths ', paths);
+  //console.log('JJJJJJJJJJJJJJJJJJJJJJJJ getStaticProps context ', context);
+  //console.log('JJJJJJJJJJJJJJJJJJJJJJJJ getStaticProps paths ', paths);
 
-  const articlesRes = await fetchAPI("/posts", {
+  console.log('JJJJJJJJJJJJJJJJJJJJJJJJ getStaticProps params ', params);
+  //const {locale} = params;
+  console.log('JJJJJJJJJJJJJJJJJJJJJJJJ getStaticProps locale === ', locale); 
+  //const slug = context.params?.slug ?? null;
+  const slug = params?.slug ?? null;
+  console.log('JJJJJJJJJJJJJJJJJJJJJJJJ getStaticProps slug === ', slug, `/n /posts?locale=${locale}`);
+  
+  const articlesRes = 
+  /*await fetchAPI("/posts", {
     filters: {
       slug: params.slug,
     },
     populate: ["featuredImage", "category", "author.picture"],
+    "/services?locale="+locale+"&filters[slug]="+context.params.slug+"&populate[0]=coverImg"+"&populate[1]=tags"+"&populate[2]=localizations",
+  });*/
+  await fetchAPI("/posts?locale="+locale+"&filters[slug]="+params.slug+"&populate[0]=featuredImage"+"&populate[1]=tags"+"&populate[2]=localizations", {
   });
+  const data = await articlesRes; 
+  console.log('JJJJJJJJJJJJJJJJJJJJJJJJ getStaticProps DATA data === ', data);
+  if (!articlesRes) {
+    return {
+      notFound: true,
+    }
+  } 
+
   const categoriesRes = await fetchAPI("/categories");
+  const dataCat = await categoriesRes; 
+  if (!categoriesRes) {
+    return {
+      notFound: true,
+    }
+  } 
+
+  const pageContext = {
+    locale: articlesRes.data[0].attributes.locale,  //page.locale,
+    locales: locales,
+    defaultLocale: defaultLocale,
+    slug: params.slug,
+    localizations: articlesRes.data[0].attributes.localizations.data,
+  };
+  console.log('JJJJJJJJJJJJJJJJJJJJJJJJ getStaticProps pageContext === ', pageContext);
+
+  const localizedPaths = getLocalizedPaths({ ...pageContext }).map((path) => {
+    console.log('JJJJJJJJJJJJJJJJJJJJJJJJ getStaticProps PATHS === ', path);
+    let arr = path.href.split('');
+    const index = arr.lastIndexOf('/') + 1;
+    arr.splice(index, 0, 'news/').join('');
+    path.href = arr.join('');
+    return path;
+  });
+  console.log('JJJJJJJJJJJJJJJJJJJJJJJJ getStaticProps localizedPaths === ', localizedPaths);
 
   return {
-  props: { article: articlesRes.data[0], categories: categoriesRes/*, menus: menusRes*/ },
-    revalidate: 1,
-  };
+    props: { 
+      article: articlesRes.data[0], categories: categoriesRes/*, menus: menusRes }*/,
+      pageContext: {
+        ...pageContext,
+        localizedPaths,
+      },
+      ...(await serverSideTranslations(locale, [])),
+      revalidate: false,
+    }
+  }
 }
 
-export async function getStaticPaths() {
+export async function getStaticPaths({ locales, defaultLocale }) {
 
-  try {
+  const articlesRes = await fetchAPI("/posts", { fields: ["slug", "locale"], populate: {localizations: "*"} });
+  const posts = articlesRes.data;
+    //console.log('111111111111111 POSTS-NEWS VVVVVVV === ', posts);
+    let paths = [];
+
+    posts.forEach((page) => {
+      //console.log('111111111111111 PAGE VVVVVVV posts.forEach((page) === ', page);
+
+      for (const locale of locales) {
+        //console.log('1111111111111111111 LOCALE ====== ', locale),
+        (
+          (page.attributes.localizations && page.attributes.localizations.data.length) ?
+            (                  
+              (locale === defaultLocale) && paths.push({
+                params: {
+                  id: page.id,
+                  slug: page.attributes.slug.toString(),
+                },
+                locale: defaultLocale,
+              }),
+              page.attributes.localizations?.data.map((item, key) => {
+                (item.attributes.locale === locale) &&           
+                paths.push({
+                  params: { 
+                    id: item.id,
+                    slug: item.attributes.slug.toString() 
+                  },
+                  locale: item.attributes.locale
+                })
+              }).flat()
+            )
+            :
+            paths.push({
+              params: {
+                id: page.id,
+                slug: page.attributes.slug.toString(),
+              },
+              locale,
+            })
+        )
+      } //for 
+    });
+
+    console.log('getStaticPaths PATHS VVVVVVVWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW === ', paths);
+    return {
+      paths,
+      fallback: false,
+    };
+  /*try {
     const articlesRes = await fetchAPI("/posts", { fields: ["slug"] });
     //console.log('WWWWWWWWWWWWWWWWWWWW getStaticPaths articlesRes = ', articlesRes);
     return {
@@ -120,7 +224,7 @@ export async function getStaticPaths() {
   } catch (error) {
     console.log('News page [slug] ', error);
     return redirect('/');
-  }
+  }*/
 
 };
 

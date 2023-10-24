@@ -4,8 +4,20 @@ import Seo from "../../components/seo";
 import Banner from "../../components/banner";
 import { fetchAPI } from "../../lib/api";
 import { getStrapiMedia } from "../../lib/media";
+//import nextI18NextConfig from '../../next-i18next.config.js'
+//import { SSRConfig, UserConfig } from 'next-i18next';
+//import { useTranslation, Trans } from 'next-i18next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+//import { useRouter } from 'next/router'
+import { getLocalizedPaths, formatSlug } from '../../lib/localize-helpers';
 
-export default function News({ posts, newspage }) {
+export default function News({ posts, newspage, newsPageTr, locale, pageContext }) {
+
+  console.log('NEWS PAGE locale = ', locale);
+  const { locales, defaultLocale } = pageContext;
+  console.log('NEWS PAGE pageContext ============================ ', pageContext);
+  console.log('NEWS PAGE newsPageTr ============================ ', newsPageTr);
+
   const imageUrl = getStrapiMedia(newspage.attributes.headerImage);
   console.log('NEWSPAGE ============================ ', newspage);
   //console.log('NEWSPAGE newspage.attributes.seo.shareImage ============================ ', newspage.attributes.seo.shareImage);
@@ -24,26 +36,65 @@ export default function News({ posts, newspage }) {
   )
 }
 
-export async function getStaticProps() {
+export async function getStaticProps({ locale, locales, defaultLocale, params }) {
   // Run API calls in parallel
- 
-  const [postsRes, newspageRes] = await Promise.all([
-    fetchAPI("/posts", { populate: ["featuredImage", "categories"] }),
+  console.log('News page ============= params = ', params);
+  console.log('News page ============= locale = ', locale);
+  
+  //const [data_t] = await serverSideTranslations(locale, ['common', 'footer'], config );
+  const [postsRes, newsPageRes] = await Promise.all([
+    /*fetchAPI("/posts", { populate: ["featuredImage", "categories"] }),
     fetchAPI("/news-page", {
       populate: {
         headerImage: { populate: "*" },
         seo: { populate: "*" },
       },
-    }),
+    }),*/
+    fetchAPI("/posts?locale="+locale+"&populate[0]=featuredImage"+"&populate[1]=categories"+"&populate[2]=seo.tags"+"&populate[3]=admin_users", {}), 
+    fetchAPI("/news-page?locale="+locale+"&populate[0]=headerImage"+"&populate[1]=seo"+"&populate[2]=seo.shareImage"+"&populate[3]=localizations", {}), 
   ]);
 
   console.log('postsRes ============= ', postsRes);
-  //console.log('newspageRes ============= ', newspageRes);
+  console.log('newsPageRes ============= ', newsPageRes);
+
+  const pageContext = {
+    locale: newsPageRes.data.attributes.locale,  //page.locale,
+    locales: locales, //context.locales,
+    defaultLocale: defaultLocale, //context.defaultLocale,
+    slug: 'news', //newsPageRes.data.attributes.slug,
+    localizations: [],  //newsPageRes.data.attributes.localizations.data,
+  };
+  console.log('newsPageRes ============= getStaticProps getLocalizedPaths({ ...pageContext }) === ', getLocalizedPaths({ ...pageContext }));
+  //const localizedPaths = getLocalizedPaths({ ...pageContext });
+  let localizedPaths = [];
+  locales.map(loc =>{
+    console.log('newsPageRes =============  LOC ===  ', loc);
+    let path = formatSlug("news", loc, defaultLocale);
+    console.log('servPageRes =============  formatSlug("news", loc, defaultLocale)  ', path);
+    localizedPaths.push({ locale: loc, href: path });
+
+  })
+  console.log('newsPageRes =============  localizedPaths  ', localizedPaths);
 
   return {
     props: {
       posts: postsRes.data,
-      newspage: newspageRes.data,
+      newspage: newsPageRes.data,
+       /*...(await serverSideTranslations(locale ?? 'en', [
+        'common',
+        'footer',
+      ])),*/
+      defaultLocale: defaultLocale,
+      locale: locale,
+      //services: servicesRes.data,
+      newsPage: newsPageRes.data,
+      collection: 'news-page',
+      pageContext: {
+        ...pageContext,
+        localizedPaths,  //localizedPaths,
+      },
+      //servicesTr: data_t.data,
+      ...(await serverSideTranslations(locale, [])),
     },
     revalidate: 60,
   };

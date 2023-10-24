@@ -1,36 +1,26 @@
 import { fetchAPI } from "../lib/api";
 
 export function getSlug (href, locale, defaultLocale) {
-    console.log('localize-helpers.js $$$$$$$$$$$$$$$$$$$$ GET-SLUG href BEFORE === ', href);
     let slug = href.split("/").pop(); 
-    console.log('localize-helpers.js $$$$$$$$$$$$$$$$$$$$ GET-SLUG slug AFTER === ', slug);
     return slug;
-    //if(locale === defaultLocale) {`/${slug}`} else {`/${locale}/${slug}`};
 }
 
 export function getSlashInPath (href) {
-   // console.log('localize-helpers.js $$$$$$$$$$$$$$$$$$$$ GET-SLASH in path href  ===', href);
-   //console.log('localize-helpers.js $$$$$$$$$$$$$$$$$$$$ GET-SLASH in path (href.split("/").length - 1)  ===', (href.split("/").length - 1));
-    return (href.split("/").length - 1);
+   return (href.split("/").length - 1);
 }
 
 export const formatSlug = (slug, locale, defaultLocale) => {
-    console.log('localize-helpers.js $$$$$$$$$$$$$$$$$$$$ formatSlug slug === ', slug);
+    
     let slug_temp = slug ? slug : '/';
-    console.log('localize-helpers.js $$$$$$$$$$$$$$$$$$$$ formatSlug slug_temp === ', slug_temp);
     return locale === defaultLocale ? `/${slug_temp}` : `/${locale}/${slug_temp}`; // if locale DOES NOT equal defaultLocale - en - it prepends the locale i.e /es/ or /de/
 }
 
 export const getLocalizedPaths = (pageContext) => {
 
     const { locales, defaultLocale, localizations, slug, locale } = pageContext;
-    console.log('localize-helpers.js $$$$$$$$$$$$$$$$$$$$ GET-LOCALIZED-PATHS pageContext === ', pageContext);
-    console.log('localize-helpers.js $$$$$$$$$$$$$$$$$$$$ GET-LOCALIZED-PATHS localizations === ', localizations);
-
+    
     const paths = locales.map((locale) => {
         // map through all locales enabled in next.config.js ['en', 'es', 'de']
-        //console.log('$$$$$$$$$$$$$$$$$$$$ GET-LOCALIZED-PATHS MAP localizations.length === ', localizations.length);
-        //console.log('$$$$$$$$$$$$$$$$$$$$ GET-LOCALIZED-PATHS MAP localizations === ', localizations);
         if (localizations.length === 0)
             return {
                 // if there is no localizations array provided by Strapi, we just return the defaultLocale page for all locales
@@ -46,7 +36,6 @@ export const getLocalizedPaths = (pageContext) => {
     localizations && localizations.map((localization) => {
         let slug = localization.attributes.slug;
         let locale = (localization.attributes.locale == 'null') ? false : localization.attributes.locale;
-        console.log('$$$$$$$$$$$$$$$$$$$$ GET-LOCALIZED-PATHS MAP SLUG === ', slug, 'LOCALE === ', locale);
         localizePath({ ...pageContext, locale, slug });    
         return (
             results.push({
@@ -55,67 +44,32 @@ export const getLocalizedPaths = (pageContext) => {
             })
         );
     }); // end map localozation
-    
-    console.log('$$$$$$$$$$$$$$$$$$$$ GET-LOCALIZED-PATHS END MAP RESULT === ', results);
-    //console.log('$$$$$$$$$$$$$$$$$$$$ GET-LOCALIZED-PATHS paths 1 === ', paths);
+
     return results;
     //return paths.add(results)
 };
 
 export const localizePath = (pageContext) => {
-    // This will be called 3 times for 'es', 'en' and 'de'.
-    // Let's say for this function call, it is called with pageContext.locale = 'de'
+    
     const { locale, defaultLocale, localizations, slug } = pageContext;
-    console.log('\n \n START START START START START START START START START ***localizePath*** ');
-    console.log('*** 1. ***localizePath*** pageContext === ', pageContext);
-    console.log('*** 2. localizePath*** pageContext.LOCALE === ', locale);
-    console.log('*** 2. localizePath*** pageContext.SLUG === ', slug);
-
-    /*const localization = pageContext.localizations.find(
-        (localization) => localization.locale === targetLocale
-    );*/
-
-
+    
     let localeFound = localizations.find((a, i) => {
-        //console.log('\n *** ',i,'.1. localizePath*** IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII === ', i);
-        //console.log('*** ',i,'.2. localizePath*** a === ', a);
-        //console.log('*** ',i,'.3. localizePath*** a.attributes.locale === ', a.attributes.locale, 'locale === ', locale);
-        //console.log('*** ',i,'.4. localizePath*** a.id === ', a.id);
         a.attributes.locale === locale;
-        //console.log('*** ',i,'.5. localizePath*** (a.attributes.locale === locale) === ', a.attributes.locale === locale);
-        // a.attributes.locale.localeCompare(locale) === 0;
-        //let flag = a.attributes.locale.localeCompare(locale);
-        //console.log('*** ',i,'.6. localizePath*** FLAG === ', flag, 'a.locale === ', a.attributes.locale, 'locale === ', locale);
-    }); // it will look in the localizations array of the 'primera-pagina' page
-    //console.log('*** 8. localizePath*** pageContext === ', pageContext);
-    console.log('*** 9. localizePath*** localeFound === ', localeFound);
-
+    }); 
+    
     if (localeFound) { 
-        console.log('*** 10. localizePath*** CASE 111 === '); 
-        console.log('END END END END END END END END END ***localizePath*** \n \n ');
-        return formatSlug(localeFound.slug, locale, defaultLocale);}
-    // if a 'de' version of the page is found, it will call formatSlug with the 'de' slug which is 'erste-seite'
-    else { 
-        console.log('*** 10. localizePath*** CASE 222 === '); 
-        console.log('END END END END END END END END END ***localizePath*** \n \n ');
+        return formatSlug(localeFound.slug, locale, defaultLocale);
+    } else { 
         return formatSlug(slug, locale, defaultLocale);
-    } // otherwise just return the default 'en' page
+    }
     
 };
 
 export const getLocalizedPage = async (targetLocale, pageContext) => {
 
-    console.log("GET LOCALIZED PAGE targetLocale === ", targetLocale);
-    console.log("GET LOCALIZED PAGE pageContext === ", pageContext);
     const localization = pageContext.localizations.find(
         (localization) => localization.attributes.locale === targetLocale
     );
-    
-    console.log("GET LOCALIZED PAGE localization === ", localization);
-
-    //const articlesRes = await fetchAPI("/services", { fields: ["slug", "locale"], populate: {localizations: "*"} });
-    //const services = articlesRes.data;
-    //const { data } = null;
     const { data } = await fetchAPI("/pages?id="+localization.id+"&filters[slug]="+params.slug+"&populate[0]=featuredImage"+"&populate[1]=SEO"+"&populate[2]=SEO.shareImage"+"&populate[3]=localizations", {
     },
     //(localization) && (
@@ -138,7 +92,7 @@ export const getLocalizedPage = async (targetLocale, pageContext) => {
                 SEO: { populate: "*" },
             },
         });*/
-      console.log("GET LOCALIZED PAGE data === ", data),
+      //console.log("GET LOCALIZED PAGE data === ", data),
     
     /*const { data } = await client.query({
         query: gql`
