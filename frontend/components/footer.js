@@ -36,7 +36,7 @@ const Footer = ({ fmenus, cInfo }) => {
       </div>
       <div className={styles.footer3}>
         <ul className="uk-navbar-nav">{renderMenu(fmenus)}</ul>
-        <ScrollToTopButton />
+        <ScrollToTopButton />{/**/}
       </div>
     </div>
   );

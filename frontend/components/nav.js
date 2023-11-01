@@ -86,7 +86,6 @@ const Nav = ({ menus, pageContext }) => {
       localizations.push.paths;
       
     } else {
-      console.log('NAV COMPONENT getLocalizationsDynPage ELSE if(articlesRes.data.length === 0) ');
       localizations = await articlesRes.data[0].attributes.localizations.data;
     }
     
@@ -177,7 +176,7 @@ const Nav = ({ menus, pageContext }) => {
       <div className={classes.navbarLeft}>
         <ul className={classes.navbarNav}>
           <li>
-            <Link href="/"><Image image={Favicon} /></Link>
+            <Link href="/" passHref><Image image={Favicon} /></Link>
           </li>
         </ul>
       </div>

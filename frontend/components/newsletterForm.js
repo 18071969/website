@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next';
 import { useForm } from 'react-hook-form';
 import { useState, useEffect } from 'react';
 import Button from "./ui/button";
@@ -5,44 +6,45 @@ import styles from "./contactForm.module.scss";
 
 function NewsletterForm() {
 
-    const { register, formState: { errors }, handleSubmit,  reset } = useForm();
-    // Enum for our statuses
-    const contactStatuses = {
-        loading: 'loading',
-        submitted: 'submitted',
-        error: 'error'
-    };
-    // Status of what's happening or happened in the component
-    const [status, setStatus] = useState();
+  const { t } = useTranslation(['home']);
+  const { register, formState: { errors }, handleSubmit,  reset } = useForm();
+  // Enum for our statuses
+  const contactStatuses = {
+      loading: 'loading',
+      submitted: 'submitted',
+      error: 'error'
+  };
+  // Status of what's happening or happened in the component
+  const [status, setStatus] = useState();
 
-    /*useEffect(() => {
-         
-      console.log('STATUS:::::::::::::::: ', status);
-   
-    try {
-      setStatus(contactStatuses.loading);
-      const response = fetch(url, config)
-        .then((res) => {
-            //console.log('NEWSLETTER FORM === res ', res);
-            if (res.ok) {
-              setStatus(contactStatuses.submitted);
-              return res.json();
-            } 
-            throw new Error('Error sending email.');
-          })
-          .then((res) => {
+  /*useEffect(() => {
+        
+    console.log('STATUS:::::::::::::::: ', status);
+  
+  try {
+    setStatus(contactStatuses.loading);
+    const response = fetch(url, config)
+      .then((res) => {
+          //console.log('NEWSLETTER FORM === res ', res);
+          if (res.ok) {
             setStatus(contactStatuses.submitted);
-            reset();
-          })
-          .catch((err) => {
-            console.log('NEWSLETTER FORM Component ==== FETCH CATCH err1 - ', err);
-          });
-
-        if (response.status == 200) {
-          console.log('Thank you for contacting us, we will be in touch soon.');
-          reset();
+            return res.json();
+          } 
+          throw new Error('Error sending email.');
+        })
+        .then((res) => {
           setStatus(contactStatuses.submitted);
-        }
+          reset();
+        })
+        .catch((err) => {
+          console.log('NEWSLETTER FORM Component ==== FETCH CATCH err1 - ', err);
+        });
+
+      if (response.status == 200) {
+        console.log('Thank you for contacting us, we will be in touch soon.');
+        reset();
+        setStatus(contactStatuses.submitted);
+      }
     } catch (err) {
         console.log('NEWSLETTER FORM Component ==== FETCH CATCH err2 - ', err);
         setStatus(contactStatuses.error);
@@ -107,18 +109,18 @@ function NewsletterForm() {
               <input
                   type="text"
                   {...register("email", 
-                      { required: "Email is required" ,
+                      { required: `${t('home:Subscribe-newslatter-req-email')}`,
                           minLength: {
                               value: 3,
-                              message: 'This is not long enough to be an email',
+                              message: `${t('home:Subscribe-newslatter-minLength-email')}`,
                           },
                           maxLength: {
                               value: 120,
-                              message: 'This is too long',
+                              message: `${t('home:Subscribe-newslatter-maxLength-email')}`,
                           },
                           pattern: {
                               value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                              message: 'Email is invalid',
+                              message: `${t('home:Subscribe-newslatter-pattern-email')}`,
                           },
                       }
                   )} 
@@ -140,10 +142,10 @@ function NewsletterForm() {
               disabled={status === contactStatuses.loading}>
               {status === contactStatuses.loading ? (
                     <>
-                    <i className="fa-solid fa-spinner fa-spin"></i>Sending...
+                    <i className="fa-solid fa-spinner fa-spin"></i>{t('home:Subscribe-newslatter-sending')}
                     </>
                 ) : (
-                    <>Subscribe</>
+                    <>{t('home:Subscribe-newslatter-label-btn')}</>
                 )}
             </Button>
           </div>
@@ -153,14 +155,14 @@ function NewsletterForm() {
               {/* If there was an error, notify the user */}
               {status === contactStatuses.error ? (
               <div  className={styles["alert"] + " " + styles["alert-success"]} /*className="alert alert-danger"*/>
-                  There was an error sending your email. Please try again.
+                  {t('home:Subscribe-newslatter-alert-error')}
               </div>
               ) : null}
 
               {/* If the form was submitted successfully, notify the user */}
               {status === contactStatuses.submitted ? (
               <div className={styles["alert"] + " " + styles["alert-success"]} /*className="alert alert-success contact_msg"*/ role="alert">
-                  Your subscribsion sent successfully.
+                  {t('home:Subscribe-newslatter-alert-success')}
               </div>
               ) : null}
             </div>

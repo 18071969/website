@@ -31,8 +31,8 @@ const Service = ({  pageContext, article /*, menus*/ }) => {
           {/*console.log('JJJJJJJJJJJJJJVVVVVVVVV ARTICLE ----------------------- ', article)*/}
           <ReactMarkdown
             children={article.attributes.description}
-            escapeHtml={true}
-          />
+           
+          /> {/*escapeHtml={true}*/}
 
           <hr className="" />
           <div className="" >
@@ -62,11 +62,11 @@ const Service = ({  pageContext, article /*, menus*/ }) => {
 
 export async function getStaticProps( context, params/**/ ) {
 
-   console.log('JJJJJJJJJJJJJJJJJJJJJJJJ getStaticProps context ', context);
+   //console.log('JJJJJJJJJJJJJJJJJJJJJJJJ getStaticProps context ', context);
    const {locale} = context;
-   console.log('JJJJJJJJJJJJJJJJJJJJJJJJ getStaticProps locale === ', locale);
+   //console.log('JJJJJJJJJJJJJJJJJJJJJJJJ getStaticProps locale === ', locale);
    const slug = context.params?.slug ?? null;
-   console.log('JJJJJJJJJJJJJJJJJJJJJJJJ getStaticProps slug === ', slug, `/n /services?locale=${locale}`);
+   //console.log('JJJJJJJJJJJJJJJJJJJJJJJJ getStaticProps slug === ', slug, `/n /services?locale=${locale}`);
    //console.log('JJJJJJJJJJJJJJJJJJJJJJJJ getStaticProps PARAMS === ', params); 
 
   const articlesRes = await fetchAPI("/services?locale="+locale+"&filters[slug]="+context.params.slug+"&populate[0]=coverImg"+"&populate[1]=tags"+"&populate[2]=localizations", {
@@ -89,10 +89,10 @@ export async function getStaticProps( context, params/**/ ) {
     }
   } 
 
-  console.log('JJJJJJJJJJJJJJJJJJJJJJJJ getStaticProps DATA articlesRes === ', articlesRes);
-  console.log('JJJJJJJJJJJJJJJJJJJJJJJJ getStaticProps DATA articlesRes.data === ', articlesRes.data);
-  console.log('JJJJJJJJJJJJJJJJJJJJJJJJ getStaticProps DATA articlesRes.data[0].attributes === ', articlesRes.data[0].attributes);
-  console.log('JJJJJJJJJJJJJJJJJJJJJJJJ getStaticProps DATA articlesRes.data[0].attributes.localizations === ', articlesRes.data[0].attributes.localizations);
+  //console.log('JJJJJJJJJJJJJJJJJJJJJJJJ getStaticProps DATA articlesRes === ', articlesRes);
+  //console.log('JJJJJJJJJJJJJJJJJJJJJJJJ getStaticProps DATA articlesRes.data === ', articlesRes.data);
+  //console.log('JJJJJJJJJJJJJJJJJJJJJJJJ getStaticProps DATA articlesRes.data[0].attributes === ', articlesRes.data[0].attributes);
+  //console.log('JJJJJJJJJJJJJJJJJJJJJJJJ getStaticProps DATA articlesRes.data[0].attributes.localizations === ', articlesRes.data[0].attributes.localizations);
 
   const pageContext = {
     locale: articlesRes.data[0].attributes.locale,  //page.locale,
@@ -102,19 +102,19 @@ export async function getStaticProps( context, params/**/ ) {
     localizations: articlesRes.data[0].attributes.localizations.data,
   };
 
-  console.log('JJJJJJJJJJJJJJJJJJJJJJJJ  BEFORE getStaticProps pageContext === ', pageContext);
-  console.log('JJJJJJJJJJJJJJJJJJJJJJJJ  BEFORE getStaticProps getLocalizedPaths({ ...pageContext }) === ', getLocalizedPaths({ ...pageContext }));
+  //console.log('JJJJJJJJJJJJJJJJJJJJJJJJ  BEFORE getStaticProps pageContext === ', pageContext);
+  //console.log('JJJJJJJJJJJJJJJJJJJJJJJJ  BEFORE getStaticProps getLocalizedPaths({ ...pageContext }) === ', getLocalizedPaths({ ...pageContext }));
   const localizedPaths = getLocalizedPaths({ ...pageContext }).map((path) => {
-    console.log('JJJJJJJJJJJJJJJJJJJJJJJJ getStaticProps PATHS === ', path);
+    //console.log('JJJJJJJJJJJJJJJJJJJJJJJJ getStaticProps PATHS === ', path);
     let arr = path.href.split('');
     const index = arr.lastIndexOf('/') + 1;
     arr.splice(index, 0, 'services/').join('');
     path.href = arr.join('');
     return path;
   });
-  console.log('JJJJJJJJJJJJJJJJJJJJJJJJ AFTER getStaticProps pageContext === ', pageContext);
-  console.log('JJJJJJJJJJJJJJJJJJJJJJJJ getStaticProps localizedPaths === ', localizedPaths);
-  console.log('JJJJJJJJJJJJJJJJJJJJJJJJ getStaticProps { ...pageContext, localizedPaths } === ', { ...pageContext, localizedPaths });
+  //console.log('JJJJJJJJJJJJJJJJJJJJJJJJ AFTER getStaticProps pageContext === ', pageContext);
+  //console.log('JJJJJJJJJJJJJJJJJJJJJJJJ getStaticProps localizedPaths === ', localizedPaths);
+  //console.log('JJJJJJJJJJJJJJJJJJJJJJJJ getStaticProps { ...pageContext, localizedPaths } === ', { ...pageContext, localizedPaths });
 
   return {
     props: {
@@ -181,7 +181,7 @@ export async function getStaticPaths({ locales, defaultLocale }) {
                 } //for 
               });
 
-              console.log('getStaticPaths PATHS VVVVVVVWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW === ', paths);
+              //console.log('getStaticPaths PATHS services/[slug].js=== ', paths);
               return {
                 paths,
                 fallback: false,

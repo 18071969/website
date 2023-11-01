@@ -1,0 +1,14 @@
+{
+    "our-mission-label-btn": "За Нас",
+    "services-label-btn": "Всички Услуги",
+    "job-section-label-btn": "Вижте Всички Работни Места",
+    "job-section-last-job-label-btn": "Научете Повече",
+    "Subscribe-newslatter-label-btn": "Абонирай се",
+    "Subscribe-newslatter-req-email": "Имейл е задължителен",
+    "Subscribe-newslatter-minLength-email": "Това не е достатъчно дълго, за да бъде имейл",
+    "Subscribe-newslatter-maxLength-email": "Това е твърде дълго",
+    "Subscribe-newslatter-pattern-email": "Имейлът е невалиден",
+    "Subscribe-newslatter-sending": "Изпращане...",
+    "Subscribe-newslatter-alert-success": "Вашият абонамент е изпратен успешно.",
+    "Subscribe-newslatter-alert-error": "Възникна грешка при изпращането на вашия имейл. Моля, опитайте отново."
+}

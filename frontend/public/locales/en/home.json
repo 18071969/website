@@ -1,0 +1,14 @@
+{
+    "our-mission-label-btn": "About Us",
+    "services-label-btn": "All Services",
+    "job-section-label-btn": "See All Jobs",
+    "job-section-last-job-label-btn": "Learn More",
+    "Subscribe-newslatter-label-btn": "Subscribe",
+    "Subscribe-newslatter-req-email": "Email is required",
+    "Subscribe-newslatter-minLength-email": "This is not long enough to be an email",
+    "Subscribe-newslatter-maxLength-email": "This is too long",
+    "Subscribe-newslatter-pattern-email": "Email is invalid",
+    "Subscribe-newslatter-sending": "Sending...",
+    "Subscribe-newslatter-alert-success": "Your subscribsion sent successfully.",
+    "Subscribe-newslatter-alert-error": "There was an error sending your email. Please try again."
+}

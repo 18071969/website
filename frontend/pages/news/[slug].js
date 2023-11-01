@@ -12,9 +12,7 @@ import { getLocalizedPaths } from '../../lib/localize-helpers';
 const Post = ({ article/*, menus*/ }) => {
   const { t } = useTranslation(['common', 'second-page'])
   const imageUrl = getStrapiMedia(article.attributes.featuredImage);
-  console.log('BBBBBBBBBBBBBBBBBBB pages/news/[slug].js  imageUrl = ', imageUrl);
-  console.log('BBBBBBBBBBBBBBBBBBB pages/news/[slug].js  article = ', article);
-  //console.log('BBBBBBBBBBBBBBBBBBB menus = ', menus);
+ //console.log('BBBBBBBBBBBBBBBBBBB menus = ', menus);
   const seo = {
     metaTitle: article.attributes.title,
     metaDescription: article.attributes.description,
@@ -95,12 +93,12 @@ export async function getStaticProps({ params, locale, locales, defaultLocale })
   //console.log('JJJJJJJJJJJJJJJJJJJJJJJJ getStaticProps context ', context);
   //console.log('JJJJJJJJJJJJJJJJJJJJJJJJ getStaticProps paths ', paths);
 
-  console.log('JJJJJJJJJJJJJJJJJJJJJJJJ getStaticProps params ', params);
+  //console.log('JJJJJJJJJJJJJJJJJJJJJJJJ getStaticProps params ', params);
   //const {locale} = params;
-  console.log('JJJJJJJJJJJJJJJJJJJJJJJJ getStaticProps locale === ', locale); 
+  //console.log('JJJJJJJJJJJJJJJJJJJJJJJJ getStaticProps locale === ', locale); 
   //const slug = context.params?.slug ?? null;
   const slug = params?.slug ?? null;
-  console.log('JJJJJJJJJJJJJJJJJJJJJJJJ getStaticProps slug === ', slug, `/n /posts?locale=${locale}`);
+  //console.log('JJJJJJJJJJJJJJJJJJJJJJJJ getStaticProps slug === ', slug, `/n /posts?locale=${locale}`);
   
   const articlesRes = 
   /*await fetchAPI("/posts", {
@@ -113,7 +111,7 @@ export async function getStaticProps({ params, locale, locales, defaultLocale })
   await fetchAPI("/posts?locale="+locale+"&filters[slug]="+params.slug+"&populate[0]=featuredImage"+"&populate[1]=tags"+"&populate[2]=localizations", {
   });
   const data = await articlesRes; 
-  console.log('JJJJJJJJJJJJJJJJJJJJJJJJ getStaticProps DATA data === ', data);
+  //console.log('JJJJJJJJJJJJJJJJJJJJJJJJ getStaticProps DATA data === ', data);
   if (!articlesRes) {
     return {
       notFound: true,
@@ -135,17 +133,17 @@ export async function getStaticProps({ params, locale, locales, defaultLocale })
     slug: params.slug,
     localizations: articlesRes.data[0].attributes.localizations.data,
   };
-  console.log('JJJJJJJJJJJJJJJJJJJJJJJJ getStaticProps pageContext === ', pageContext);
+  //console.log('JJJJJJJJJJJJJJJJJJJJJJJJ getStaticProps pageContext === ', pageContext);
 
   const localizedPaths = getLocalizedPaths({ ...pageContext }).map((path) => {
-    console.log('JJJJJJJJJJJJJJJJJJJJJJJJ getStaticProps PATHS === ', path);
+    //console.log('JJJJJJJJJJJJJJJJJJJJJJJJ getStaticProps PATHS === ', path);
     let arr = path.href.split('');
     const index = arr.lastIndexOf('/') + 1;
     arr.splice(index, 0, 'news/').join('');
     path.href = arr.join('');
     return path;
   });
-  console.log('JJJJJJJJJJJJJJJJJJJJJJJJ getStaticProps localizedPaths === ', localizedPaths);
+  //console.log('JJJJJJJJJJJJJJJJJJJJJJJJ getStaticProps localizedPaths === ', localizedPaths);
 
   return {
     props: { 
@@ -205,7 +203,7 @@ export async function getStaticPaths({ locales, defaultLocale }) {
       } //for 
     });
 
-    console.log('getStaticPaths PATHS VVVVVVVWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW === ', paths);
+    console.log('getStaticPaths PATHS === ', paths);
     return {
       paths,
       fallback: false,

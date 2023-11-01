@@ -1,0 +1,43 @@
+{
+    "form-title": "Send us a message",
+    "label-btn": "Send Message",
+    "full-name": "Full name",
+    "email": "Email",
+    "sending": "Sending...",
+    "alert-success": "Your message was sent successfully.",
+    "alert-danger": "Oops, there was an error sending your email. Please try again.",
+    "required-message": "You need to enter your message",
+    "minLength-message": "Your message must be longer than this!",
+    "maxLength-message": "Your message can't be more than 1000 characters",
+    "required-email": "Email is required",
+    "minLength-email":"This is not long enough to be an email",
+    "maxLength-email": "This is too long",
+    "pattern-email": "Email is invalid",
+    "required-name": "You must enter your name",
+
+    
+
+
+    "change-locale": "Change locale to \"{{changeTo}}\"",
+    "to-second-page": "To second page",
+    "error-with-status": "A {{statusCode}} error occurred on server",
+    "error-without-status": "An error occurred on the server",
+    "title2": "Home | next-i18next",
+    "blog": {
+      "appDir": {
+        "question": "Are you using the new Next.js 13 app directory?",
+        "answer": "Then check out <1>this blog post</1>.",
+        "link": "https://locize.com/blog/next-13-app-dir-i18n/"
+      },
+      "optimized": {
+        "question": "Do you like to unleash some super powers to have all side optimized translations?",
+        "answer": "Then you may have a look at <1>this blog post</1>.",
+        "link": "https://locize.com/blog/next-i18next/"
+      },
+      "ssg": {
+        "question": "Do you want to use SSG (next export)?",
+        "answer": "Then you may have a look at <1>this blog post</1>.",
+        "link": "https://locize.com/blog/next-i18n-static/"
+      }
+    }
+  }

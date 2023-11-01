@@ -1,12 +1,15 @@
+import { useTranslation } from 'next-i18next';
+import { motion, useAnimation } from 'framer-motion';
+import { useInView } from "react-intersection-observer";
+import { useEffect } from "react";
 import React from "react";
 import Image from "./image";
 import Button from "./ui/button"; 
 import styles from './ourMission.module.scss';
-import { motion, useAnimation } from 'framer-motion';
-import { useInView } from "react-intersection-observer";
-import { useEffect } from "react";
 
 const OurMission = ({ heading, content, showLogo, image }) => {
+  const { t } = useTranslation(['home']);
+  //console.log('OurMission t === ', t);
     {/*<div className={`bg-${theme}`}></div>*/}
     //console.log('OUR MISSION === heading ===', heading);
     //console.log('OUR MISSION === image ===', image);
@@ -90,7 +93,7 @@ const OurMission = ({ heading, content, showLogo, image }) => {
             <div>
               {content && <span className={`block text-white`}>{content}</span>}
             </div>
-            <div className={styles.button}><Button link={`pages/about-us`}>About Us</Button></div>
+            <div className={styles.button}><Button link={`pages/about-us`}>{t('home:our-mission-label-btn')}</Button></div>
           </motion.div>
           <div className={styles.half}>
             {showLogo && <motion.div className=""

@@ -1,3 +1,4 @@
+//import { useTranslation } from 'next-i18next';
 import Card from "./card";
 import styles from './postSelections.module.scss';
 import { motion, useAnimation } from 'framer-motion';
@@ -5,6 +6,7 @@ import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
 
 const PostsSelection = ( props ) => {
+  //const { t } = useTranslation(['home']);
     //console.log('POSTS SECTION props ))))))))))))))))))))))  ', props);
     const {articles, heading} = props;
     //console.log('POSTS SECTION heading ))))))))))))))))))))))  ', heading);    

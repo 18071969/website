@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import styles from "./banner.module.scss";
 
 function Banner(props) {
-  //console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% styles.banner', styles.banner);
+  //console.log('%%% styles.banner', styles.banner);
   return (
     <>
       <style global jsx>{`
@@ -40,12 +40,13 @@ function Banner(props) {
                 ease: [0.5, 0.71, 1, 1.5],
             }}
             initial={{ opacity: 0, scale: 0.5 }}
-            whileHover={{ scale: 1.2 }}>{props.slogan}</motion.h1>
+            whileHover={{ scale: 1.2 }}>{props.slogan}
+          </motion.h1>
         </motion.div>
         
         <div className={styles.btns}>
-          {props.buttons && props.buttons.map((button) => (
-            <div className={styles.btn}> 
+          {props.buttons && props.buttons.map((button, k) => (
+            <div className={styles.btn} key={k}> 
               <Button link={button.url}>{button.label}</Button>
             </div>
           ))}

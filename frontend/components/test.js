@@ -74,7 +74,7 @@ const itemStyles = {
   borderRadius: 4,
   fontSize: 15,
   color: '#333',
-  "&:focus": { position: "relative", boxShadow: `0 0 0 2px green` },
+  "&:focus": { position: "relative", boxShadow: `0 0 0 2px grey` },
   "&:hover": { backgroundColor: 'silver' }
 };
 
@@ -91,7 +91,7 @@ const StyledTrigger = styled(NavigationMenuPrimitive.Trigger, {
 
 const StyledCaret = styled(CaretDownIcon, {
   position: "relative",
-  color: 'violet',
+  color: 'blue',
   top: 1,
   "[data-state=open] &": { transform: "rotate(-180deg)" },
   "@media (prefers-reduced-motion: no-preference)": {
@@ -126,7 +126,7 @@ const StyledLink = styled(NavigationMenuPrimitive.Link, {
   lineHeight: 1,
 });
 
-const StyledContent = styled(NavigationMenuPrimitive.Content, {
+const StyledContent = styled(NavigationMenuPrimitive.Content, { //dropdown menu
   position: "absolute",
   top: 0,
   left: 0,
@@ -142,7 +142,7 @@ const StyledContent = styled(NavigationMenuPrimitive.Content, {
   }
 });
 
-const StyledIndicator = styled(NavigationMenuPrimitive.Indicator, {
+const StyledIndicator = styled(NavigationMenuPrimitive.Indicator, { //karetkata (strelkata pod menuto)
   
   display: "flex",
   alignItems: "flex-end",
@@ -243,7 +243,7 @@ const LinkTitle = styled("div", {
   fontWeight: 500,
   lineHeight: 1.2,
   marginBottom: 5,
-  color: 'violet'
+  color: 'black'
 });
 
 const LinkText = styled("p", {
@@ -257,7 +257,8 @@ const ContentListItem = React.forwardRef(
   ({ children, title, ...props }, forwardedRef) => {
    
   const router = useRouter();
-  const isActive = router.asPath === props.href;
+  const isActive = '/'+router.locale+router.asPath === props.href;
+  //console.log("MENU_LINK $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ router.locale+router.asPath === ", '/'+router.locale+router.asPath);
   //console.log("MENU_LINK $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ props.href ", props.href);
   //console.log("MENU_LINK $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ isActive ", isActive);
 
@@ -272,7 +273,7 @@ const ContentListItem = React.forwardRef(
           /*padding: 12,*/
           padding: 3,
           borderRadius: 6,
-          "&:hover": { backgroundColor: 'grey' },
+          "&:hover": { backgroundColor: 'silver' },
           width: '150px'
         }}
       >
@@ -300,37 +301,64 @@ const renderMenu = (menus) => {
     return menus.map((items, index) => {
     
     const router = useRouter();
-    const isActive = router.asPath === items?.attributes.url;
+    //console.log('TEST <NavigationMenuItem> router = ', router);
+    let url = '/'+ router.locale + router.asPath;
+    const isActive = url === items?.attributes.url;
+    //const isActive = router.asPath === items?.attributes.url;
+    
+    //console.log('TEST <NavigationMenuItem> /router.locale/router.asPath = ', '/'+ router.locale + router.asPath);
+    //console.log('TEST <NavigationMenuItem> items?.attributes.url = ', items?.attributes.url);
+    //console.log('TEST <NavigationMenuItem> items.attributes.children = ', items.attributes.children);
+    //console.log('TEST <NavigationMenuItem> items.attributes.children.data = ', items.attributes.children.data);
+    //console.log('TEST <NavigationMenuItem> items.attributes.children?.data[index] = ', items.attributes.children?.data[index]);
+    //console.log('TEST <NavigationMenuItem> items.attributes.children?.data[0]?.id = ', items.attributes.children?.data[0]?.id);
 
     return (
        <>
           {(Object.keys(items.attributes.children.data).length===0) && (
 
-          <NavigationMenuItem key={index}>
-            <NavigationMenuLink  active={isActive} className={styles.NavigationMenuLink} href={items?.attributes.url}>
-              <NavigationMenuTriggerNoCaret key={items?.id}>{items?.attributes.title}</NavigationMenuTriggerNoCaret>
+         
+          <NavigationMenuItem key={index}>   
+            {/*console.log('TEST <NavigationMenuItem> index = ', index)*/}
+            {/*console.log('TEST <NavigationMenuItem> items = ', items)*/}
+            <NavigationMenuLink  active={isActive} className={styles.NavigationMenuLink} href={items?.attributes.url}  key={items?.id}>
+              <NavigationMenuTriggerNoCaret key={items?.id}>
+                {items?.attributes.title}
+              </NavigationMenuTriggerNoCaret>
             </NavigationMenuLink>
           </NavigationMenuItem>
           )}
           {(Object.keys(items.attributes.children.data).length>0) && (
               <NavigationMenuItem key={items?.id}>
-                  <NavigationMenuLink  active={isActive} className={styles.NavigationMenuLink} href={items?.attributes.url}>
-                    <NavigationMenuTrigger>{items?.attributes.title}</NavigationMenuTrigger>           
+                  <NavigationMenuLink  active={isActive} className={styles.NavigationMenuLink} href={items?.attributes.url}  key={items?.id}>
+                    <NavigationMenuTrigger key={items?.id}>
+                      {items?.attributes.title}           
+                    </NavigationMenuTrigger>
                   </NavigationMenuLink>
                   {(Object.keys(items.attributes.children.data).length>0) && 
                   <NavigationMenuContent>
                 {/*<NavigationMenu.Sub defaultValue="sub1"></NavigationMenu.Sub>*/} 
                       <ContentList layout="">
-                        <ContentListItem className={styles.SubMenuLink}  key={items.attributes.children?.id}
-                        css={{
-                          display: 'block !important',
-                          visibility: 'visible !important',
-                          background: `linear-gradient(135deg, #fff 0%, #000 100%);`,
-                          border: '3px solid black',
-                        }}
-                        >
-                          {renderMenu(items.attributes.children.data)}
-                        </ContentListItem>
+                        {items.attributes.children.data.map((k, value) => {
+                          //console.log('TEST <NavigationMenuItem> K = ', k, ' value = ', value);
+                          //console.log('TEST <NavigationMenuItem> items.attributes.children?.data[value]?.id = ', items.attributes.children?.data[value]?.id);
+                          let urlSub = '/'+ router.locale + router.asPath;
+                          const isActiveSub = urlSub === items.attributes.children?.data[value]?.attributes.url;
+                          //console.log('TEST <NavigationMenuItem> isActiveSub === ', isActiveSub,  'urlSub = ', urlSub, ' items.attributes.children?.data[value]?.attributes.url = ', items.attributes.children?.data[value]?.attributes.url);
+                          return <ContentListItem active={isActiveSub} className={styles.SubMenuLink}  key={items.attributes.children?.data[value]?.id}
+                            css={{
+                              display: 'block !important',
+                              visibility: 'visible !important',
+                              background: `linear-gradient(135deg, #fff 0%, #000 100%);`,
+                              border: '3px solid black',
+                            }}
+                            title={items.attributes.children?.data[value]?.attributes.title}
+                            href={items.attributes.children?.data[value]?.attributes.url}
+                          ></ContentListItem>
+                        })}
+                       
+                          {/*renderMenu(items.attributes.children.data)*/}
+                       
                       </ContentList>
                   
                   </NavigationMenuContent>}

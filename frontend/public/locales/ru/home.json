@@ -1,0 +1,14 @@
+{
+    "our-mission-label-btn": "О Нас",
+    "services-label-btn": "Все Услуги",
+    "job-section-label-btn": "Посмотреть все Вакансии",
+    "job-section-last-job-label-btn": "Узнать Больше",
+    "Subscribe-newslatter-label-btn": "Подписаться",
+    "Subscribe-newslatter-req-email": "Требуется адрес электронной почты",
+    "Subscribe-newslatter-minLength-email": "Это недостаточно долго, чтобы быть электронным письмом",
+    "Subscribe-newslatter-maxLength-email": "Это слишком долго",
+    "Subscribe-newslatter-pattern-email": "Электронная почта недействительна",
+    "Subscribe-newslatter-sending": "Отправка...",
+    "Subscribe-newslatter-alert-success": "Ваша подписка успешно отправлена.",
+    "Subscribe-newslatter-alert-error": "Произошла ошибка при отправке вашего письма. Пожалуйста, попробуйте еще раз."
+}

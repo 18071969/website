@@ -13,23 +13,23 @@ import { slideLeft } from "../lib/animation";
 
 const ServicesFeaturedSection = ( props ) => {
 
-    console.log('SERVICES-FEATURED SECTION props ))))))))))))))))))))))  ', props);
-    console.log('SERVICES-FEATURED SECTION LOCALE ))))))))))))))))))))))  ', props.locale);  
-    console.log('SERVICES-FEATURED SECTION DEFAULT-LOCALE ))))))))))))))))))))))  ', props.defaultLocale);
+    //console.log('SERVICES-FEATURED SECTION props ))))))))))))))))))))))  ', props);
+    //console.log('SERVICES-FEATURED SECTION LOCALE ))))))))))))))))))))))  ', props.locale);  
+    //console.log('SERVICES-FEATURED SECTION DEFAULT-LOCALE ))))))))))))))))))))))  ', props.defaultLocale);
     const locale = props.locale;
     const defaultLocale = props.defaultLocale;
     const articles = props.articles;
     const sectionTitle = props.title;
-    console.log('SERVICES-FEATURED SECTION articles ))))))))))))))))))))))  ', articles);
+    //console.log('SERVICES-FEATURED SECTION articles ))))))))))))))))))))))  ', articles);
     let slug, name = ''; 
     let coverImg = null;
-    console.log('SERVICES-FEATURED SECTION articles ))))))))))))))))))))))  ', articles);
+    //console.log('SERVICES-FEATURED SECTION articles ))))))))))))))))))))))  ', articles);
     //{/*viewport={{ root: targetRef }}*/} 
     const targetRef = useRef(null); 
     const {ref, inView} = useInView({
       threshold: 0.25
     });
-    console.log('SERVICES-FEATURED SECTION articles ))))))))))))))))))))))  ref = ', ref);
+    //console.log('SERVICES-FEATURED SECTION articles ))))))))))))))))))))))  ref = ', ref);
     const { scrollYProgress } = useScroll({
       target: ref, //targetRef,
       offset: ["end end", "end start"],
@@ -71,7 +71,7 @@ const ServicesFeaturedSection = ( props ) => {
         animationRight.start({x: '-10vw', opacity: 0});
         animationLeft.start({y: '-10vw', opacity: 0})
       }
-      console.log('use effect hook, in View = ', inView);
+      //console.log('use effect hook, in View = ', inView);
     }, [inView, animationLeft, animationRight]);
 
     return (
@@ -92,14 +92,14 @@ const ServicesFeaturedSection = ( props ) => {
             >
             
           {articles.map((article) => {
-              console.log('SERVICES-FEATURED SECTION  article.attributes ))))))))))))))))))))))  ', article.attributes);
+              //console.log('SERVICES-FEATURED SECTION  article.attributes ))))))))))))))))))))))  ', article.attributes);
  
                 //const {name, slug} = article.attributes;
                 name = article.attributes.name;
                 slug = article.attributes.slug;
                 coverImg = article.attributes.coverImg;
 
-              console.log('SERVICES-FEATURED SECTION  coverImg ))))))))))))))))))))))(((((((((((((((())))))))))))))))  ',coverImg);
+              //console.log('SERVICES-FEATURED SECTION  coverImg ))))))))))))))))))))))(((((((((((((((())))))))))))))))  ',coverImg);
               //console.log('SERVICES-FEATURED SECTION SLUG ))))))))))))))))))))))(((((((((((((((())))))))))))))))  ', slug);
           return (
             <Link key={`article_${article.id}`} href={`services/${slug}`} className={styles.singleServ} animate={animationRight}>

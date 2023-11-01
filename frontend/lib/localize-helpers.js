@@ -67,11 +67,14 @@ export const localizePath = (pageContext) => {
 
 export const getLocalizedPage = async (targetLocale, pageContext) => {
 
-    const localization = pageContext.localizations.find(
-        (localization) => localization.attributes.locale === targetLocale
-    );
-    const { data } = await fetchAPI("/pages?id="+localization.id+"&filters[slug]="+params.slug+"&populate[0]=featuredImage"+"&populate[1]=SEO"+"&populate[2]=SEO.shareImage"+"&populate[3]=localizations", {
-    },
+    //console.log("GET LOCALIZED PAGE targetLocale === ", targetLocale);
+    //console.log("GET LOCALIZED PAGE pageContext === ", pageContext);
+
+    const localization = pageContext.localizations.find((localization) => localization.attributes.locale === targetLocale);
+                                                //.map(localization => console.log("GET LOCALIZED PAGE FIND localization === ", localization)); 
+    //console.log("GET LOCALIZED PAGE localization === ", localization);
+    //const { data } = await fetchAPI("/pages?id="+localization.id+"&filters[slug]="+params.slug+"&populate[0]=featuredImage"+"&populate[1]=SEO"+"&populate[2]=SEO.shareImage"+"&populate[3]=localizations", {
+    //},
     //(localization) && (
 
         
@@ -116,5 +119,6 @@ export const getLocalizedPage = async (targetLocale, pageContext) => {
     });*/
 
         //return data.page;
-    )
+        //return data;
+   
 };

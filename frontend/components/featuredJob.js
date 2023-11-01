@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next';
 import Link from "next/link";
 import Image from "./image";
 import Button from "./ui/button"; 
@@ -11,6 +12,7 @@ import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
 
 const FeaturedJob = ( props ) => {
+  const { t } = useTranslation(['home']);
     //console.log('FEATURED-JOB SECTION props VVVVVVVVVVVVVVVVVVVVVV  ', props);
     const {heading, announcement, job} = props.jobData;
     //console.log('FEATURED-JOB SECTION job ))))))))))))))))))))))  ', job);    
@@ -85,14 +87,14 @@ const FeaturedJob = ( props ) => {
           <h1 className={styles.servicesTitle}>{heading}</h1>
           <h3>{announcement}</h3>
           
-          <div className={styles.button}><Button link={`jobs/`}>See All Jobs</Button></div>
+          <div className={styles.button}><Button link={`jobs/`}>{t('home:job-section-label-btn')}</Button></div>
           {/*<Button link={button.url}>See All Jobs</Button>*/}
         </motion.div>
         <motion.div className={styles.twoThird} animate={animationRight} >
             {/*images.map(image => /*console.log('image.attributes.url ===!!! ', image.attributes.url)<Image image={image} />)*/}
                 <div style={imgStyle}> <Image image={images} /></div>
                 <p>{desc}</p>
-                <Button link={`jobs/`+slug}>Learn More</Button>
+                <Button link={`jobs/`+slug}>{t('home:job-section-last-job-label-btn')}</Button>
         </motion.div>
           {/*<Link key={`job_${article.id}`} href={`job/`+slug} className={styles.singleServ}>
               <h2>{name}</h2>
