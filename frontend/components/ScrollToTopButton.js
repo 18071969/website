@@ -36,7 +36,7 @@ function ScrollToTopButton() {
     return (
         <motion.button
             className="fixed bottom-0 right-0 p-10"
-            style="transform: translateY(-50%); padding: 10px;"
+            style="transform: translateY(-50%), padding: 10px"
             id="GoToTopButton"
             title="Go to top"
             variants={ScrollToTopContainerVariants}

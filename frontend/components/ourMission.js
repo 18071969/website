@@ -93,7 +93,7 @@ const OurMission = ({ heading, content, showLogo, image }) => {
             <div>
               {content && <span className={`block text-white`}>{content}</span>}
             </div>
-            <div className={styles.button}><Button link={`pages/about-us`}>{t('home:our-mission-label-btn')}</Button></div>
+            <div className={styles.button}><Button link={`/about-us`}>{t('home:our-mission-label-btn')}</Button></div>
           </motion.div>
           <div className={styles.half}>
             {showLogo && <motion.div className=""

@@ -8,6 +8,7 @@ import ReactMarkdown from 'react-markdown'; //react-markdown/with-html
 import { fetchAPI } from "../../lib/api";
 import { getStrapiMedia } from "../../lib/media";
 import { getLocalizedPaths } from '../../lib/localize-helpers';
+import { jsonToHtml, renderHTML } from '../../lib/editorjs-parser';
 
 const Post = ({ article/*, menus*/ }) => {
   const { t } = useTranslation(['common', 'second-page'])
@@ -28,7 +29,7 @@ const Post = ({ article/*, menus*/ }) => {
       <div className="">
         <div className="">
           {/*<ReactMarkdown children={article.attributes.content}  escapeHtml={false}/> */}
-          {article.attributes.content}
+          {renderHTML(jsonToHtml(article.attributes.content))}
           <hr className="" />
           <div className="" >
             {/*<div>

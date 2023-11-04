@@ -6,7 +6,7 @@ import Seo from "../components/seo";
 import Banner from "../components/banner";
 import OurMission from "../components/ourMission";
 import PostsSelection from "../components/postSelections";
-import ServicesSection from "../components/servicesSection";
+//import ServicesSection from "../components/servicesSection";
 import FeaturedJob from "../components/featuredJob";
 import Newsletter from "../components/newsletter";
 import ContactForm from "../components/contactForm";
@@ -15,6 +15,8 @@ import ReactMarkdown from "react-markdown"; //react-markdown/with-html
 import { fetchAPI } from "../lib/api";
 import { getStrapiMedia } from "../lib/media";
 import { getLocalizedPaths } from '../lib/localize-helpers';
+
+import { jsonToHtml, renderHTML } from '../lib/editorjs-parser';
 
 const Page = ({ pageContext, page, homepage, posts/*, menus*/ }) => {
 
@@ -44,7 +46,7 @@ const Page = ({ pageContext, page, homepage, posts/*, menus*/ }) => {
     {homepage?.attributes.Hero ? <Banner slogan={homepage.attributes.Hero.slogan1} buttons={homepage.attributes.Hero.buttons} imageUrl={imageUrlHero} />
                                 : <Banner slogan={page.attributes.Title}  imageUrl={imageUrl} />}
     {ourMission && <OurMission heading={ourMission.heading} content={ourMission.content} showLogo={ourMission.showLogo} image={ourMission.image} />}
-    {servicesPreview && <ServicesSection articles={servicesPreview.services.data} title={servicesPreview.sectionTitle} />}
+    {/*servicesPreview && <ServicesSection articles={servicesPreview.services.data} title={servicesPreview.sectionTitle} />*/}
     {featuredPosts && <PostsSelection articles={featuredPosts} heading={heading} />}
     {featuredJob && <FeaturedJob jobData={featuredJob} />/**/}
     {newsletter && <Newsletter heading={newsletter.heading} subHeading={newsletter.subHeading} image={newsletter.image} />}
@@ -52,6 +54,8 @@ const Page = ({ pageContext, page, homepage, posts/*, menus*/ }) => {
     {/*<h1>{page.attributes.Title}</h1>*/}
     <div className="">
       {/*<ReactMarkdown children={page.attributes.Content}  escapeHtml={false}/>*/}
+      {renderHTML(jsonToHtml(page.attributes.Content))}
+
       {(router.query.slug[0] == 'contact-us' || router.query.slug[0] == 'svrzhete-se-s-nas' || router.query.slug[0] == 'svyazatsya-s-nami') && <ContactForm />}
       <hr className="" />
       <div className="">

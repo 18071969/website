@@ -1,14 +1,18 @@
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { useRouter } from 'next/router';
 
 import Seo from "../../components/seo";
 import Banner from "../../components/banner";
 import ReactMarkdown from "react-markdown"; //react-markdown/with-html
+import ReactDOM from 'react-dom';
+import marked from 'marked'
+import remarkGfm from "remark-gfm";
+//import gfm from 'remark-gfm';
 
 import { fetchAPI } from "../../lib/api";
 import { getStrapiMedia } from "../../lib/media";
 import { getLocalizedPaths } from '../../lib/localize-helpers';
+import { jsonToHtml, renderHTML } from '../../lib/editorjs-parser';
 
 const Service = ({  pageContext, article /*, menus*/ }) => {
   //console.log('BBBBBBBBBBBBBBBBBBB pages/services/[slug].js  article = ', article);
@@ -23,17 +27,14 @@ const Service = ({  pageContext, article /*, menus*/ }) => {
     article: true,
   };
 
+
+
   return (
     <>
       <Seo seo={seo} />
       <Banner slogan={article.attributes.name}  imageUrl={imageUrl} />  
       <div className="">
-          {/*console.log('JJJJJJJJJJJJJJVVVVVVVVV ARTICLE ----------------------- ', article)*/}
-          <ReactMarkdown
-            children={article.attributes.description}
-           
-          /> {/*escapeHtml={true}*/}
-
+          {renderHTML(jsonToHtml(article.attributes.description))}
           <hr className="" />
           <div className="" >
             {/*<div>
