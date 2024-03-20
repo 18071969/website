@@ -1,4 +1,58 @@
+/* Mixins */
+
+@mixin border-radius ($radius-size) {
+  border-radius: $radius-size;
+  -moz-border-radius: $radius-size;
+  -webkit-border-radius: $radius-size;
+  -ms-border-radius: $radius-size;
+}
+
+@mixin border-shadow () {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.btn {
+  padding: 0.5rem 1.5rem;
+  font-size: $font-size-md+0.2;
+  //@include border-radius(5px);
+}
+
+@mixin button ($primary, $secondary) {
+  @extend .btn;
+
+  background-color: $secondary;
+  color: $primary;
+  border: 1px solid $primary;
+
+  &:hover,
+  &:focus {
+    background-color: $primary;
+    color: $secondary;
+    border-color: $secondary;
+  }
+}
+
 @mixin banerImage($name) {
-    $url:"../images/#{$name}.png";
-    background: url($url);
-  }/**/
+  $url:"../images/#{$name}.png";
+  background: url($url);
+}
+
+@mixin background($imgpath/*,$position:0 0,$repeat: no-repeat*/) {
+  background-image: url("$imgpath");
+  /*background: {
+  background-image: $imgpath;
+      image: url($imgpath);
+      position: $position;
+      repeat: $repeat;
+  }*/
+}
+/*.testing {
+  @include background('/my/img/path.png');
+}*/
+
+@mixin center-block () {
+  display: block;
+  float: none;
+  margin-left: auto;
+  margin-right: auto;
+}

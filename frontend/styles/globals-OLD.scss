@@ -1,0 +1,99 @@
+@use "variables" as v;
+//@import "variables";
+
+//@import  '../components/servicesFeaturedSection.module.scss';
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    /*overflow-x: hidden;
+    box-sizing: inherit;*/
+    box-sizing: border-box;
+}
+*:not(.navbar), *::before:not(.navbar), *::after:not(.navbar)  { overflow-x: hidden !important; }
+
+html {
+  box-sizing: border-box;
+  
+  @media only screen and (max-width: v.$bp-largest) {
+      font-size: 75%;
+  }
+}
+
+body {
+  font-family: v.$font-display;
+  color: v.$color-grey-dark-2;
+  font-weight: 300;
+  line-height: 1.6;
+}
+/*html,
+body {
+  padding: 0;
+  margin: 0;
+  line-height: 1.5;
+  font-family: 'Open Sans', 'Lato', sans-serif;
+  color: #414141;
+  border: 1px solid $primaryColor;
+}*/
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: v.$font-primary;
+  //font-family: 'Lato', sans-serif;
+  color: v.$color-grey-dark-3;
+}
+
+h1 {
+  font-size: clamp(2rem, 1rem + 10vw , 5rem);
+  color: v.$color-accent; // added for testing
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.center {
+  margin: auto;
+  text-align: center;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+  body {
+    color: white;
+    background: black;
+  }
+}
+
+
+@mixin background($imgpath/*,$position:0 0,$repeat: no-repeat*/) {
+  background-image: url("$imgpath");
+    /*background: {
+      background-image: $imgpath;
+        image: url($imgpath);
+        position: $position;
+        repeat: $repeat;
+    }*/
+}
+/*.testing {
+    @include background('/my/img/path.png');
+}*/

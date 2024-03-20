@@ -1,13 +1,22 @@
-// COLOR VARIABLES
-$color-accent:#e2231a;
-$color-primary:#00396f;
-$color-primary-dark: rgb(95, 5, 5);
+/*:html {
+  --background-color: white;
+}*/
+$background-color: var(--background-color);
+//$background-color: darken(var(--color-primary), 10%);
+$btn-style: var(--btn-style);
+:export {
+  btnStyle: $btn-style;
+}
+$font-color: var(--font-color);
+//$dark-theme: var(--dark-theme);
 
-//:export {
-//  primaryColor: $color-primary;
-//}
-
+// Colors
+$color-accent: var(--color-accent);  //#6a1b9a;   //#e2231a;
+$color-primary: var(--color-primary); //#f8bbd0;  //var(--background-color); //#00396f;
 $color-secondary: #0985fa;
+//$color: var(--color);
+//$color-primary-dark: rgb(95, 5, 5);
+
 
 $color-grey-light-1: #f9f7f6;
 $color-grey-light-2: #aaa;
@@ -16,42 +25,61 @@ $color-grey-dark-1: #54483A;
 $color-grey-dark-2: #6D5D4B;
 $color-grey-dark-3: #2b2b2b;
 
-// FONT VARIABLES
-$font-primary: 'Nunito', sans-serif;
+$light-blue: #007bff;
+$warning-red: #dc3545;
+
+//  $background-color: #2b2b2b;
+
+// Theme
+/*$dark-theme: true !default;
+@if var(--theme-skin) == 'dark' {
+  $dark-theme: true;
+} @else if var(--theme-skin) == 'light' {
+  $dark-theme: false;
+} 
+html[data-theme="dark"] {
+  //$background-color: darken(var(--background-color), 50%);
+  $background-color: hsl($background-color, 100%, 75%);
+  $background-color: red;
+}
+//[data-theme="dark"] {
+  //$background-color: darken(var(--background-color), 20%);
+  //$background-color: hsla(var(--background-color), 20%);
+//}
+$dark-theme: true !default;
+*/
+/*@if $dark-theme {
+  //hsl(0, 100%, 50%). Saturation and lightness are represented as percentages. 100% is full saturation, and 0% is a shade of gray. 0% lightness is black, 100% lightness is white, and 50% lightness is “normal”.
+  //$color-primary: darken(var(--color-primary), 60%);  //var(--color-primary-darker) 0 66%
+  $color-primary: $color-primary 0 60%;
+  //$color-accent: lighten($color-accent, 60%);
+  $color-accent: $color-accent 60% 0;
+  //$background-color: darken($background-color, 50%);
+  $background-color: hsl($background-color, 100%, 75%);  //$background-color 0 50%;
+  //$color: lighten($color, 60%);
+  $color: $color 0 60%;
+}*/
+
+// Spacing
+//$m-space: 15px;
+$space-sm: 0.5rem;
+$space-md: 1rem;
+$space-lg: 1.5rem;
+
+// Fonts
+$font-primary: 'Lato', sans-serif;
 $font-display: 'Josefin Sans', sans-serif;
+$helvetica: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$rockwell: 'Rockwell', "Courier Bold", Courier, Georgia, Times, "Times New Roman", serif;
+//$font-primary: 'Nunito', sans-serif;
+
+// Fonts sizing
+$font-size-sm: 0.5rem;
+$font-size-md: 1rem;
+$font-size-lg: 2rem;
 
 // RESPONSIVE BREAKPOINTS
 $bp-largest: 75em;   // 1200px
 $bp-large: 62.5em;   // 1000px
 $bp-medium: 50em;    // 800px;
 $bp-small: 37.5em;   // 600px;
-
-$primary: #00396f;
-$accent: #e2231a;
-$secondary: #dfa612;
-
-
-/* Shared Variables */
-//:root {
-    .root :global {
-  --headerHeight: 80px;
-  --middleHeight: 300px;
-  --footerHeight: 100px;
-
-  --color-primary: #{$color-primary};
-  --color-accent: #{$color-accent};
-  --color-secondary: #{$color-secondary};
-
-  --red: #ff6f69;  
-  --beige: #ffeead;  
-  --yellow: #ffcc5c;  
-
-  --font-size-sm: 0.5rem;
-  --font-size-md: 1rem;
-  --font-size-lg: 2rem;
-
-  --space-sm: 0.5rem;
-  --space-md: 1rem;
-  --space-lg: 1.5rem;
-
-}

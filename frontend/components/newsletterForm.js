@@ -17,6 +17,14 @@ function NewsletterForm() {
   // Status of what's happening or happened in the component
   const [status, setStatus] = useState();
 
+  const [btnClass, setBtnClass] = useState("");
+  useEffect(() => {
+    if (typeof document !== "undefined") {
+      setBtnClass(document.documentElement.style.getPropertyValue('--btn-style'));
+      console.log('NEWSLETTER FORM ====================== btnClass === ', document.documentElement.style.getPropertyValue('--btn-style'));
+    }
+  }, []);
+
   /*useEffect(() => {
         
     console.log('STATUS:::::::::::::::: ', status);
@@ -135,9 +143,11 @@ function NewsletterForm() {
             </div>
           
 
+          {/*  <Button link={`jobs/`} btnStyle={btnClass}>{t('home:Subscribe-newslatter-label-btn')}</Button>link={`r`}*/}
           <div className={styles.formRow}>
             <Button               
-              type="submit"
+              type="submit"            
+              btnStyle={btnClass}
               className="inline-flex justify-center" 
               disabled={status === contactStatuses.loading}>
               {status === contactStatuses.loading ? (

@@ -4,7 +4,7 @@ import Seo from "../../components/seo";
 import Banner from "../../components/banner";
 import ServicesFeaturedSection from "../../components/servicesFeaturedSection";
 import ServicesSection from "../../components/ServicesSection";
-import { fetchAPI } from "../../lib/api";
+import { fetchAPI, getSetStyleRule, setCssVar } from "../../lib/api";
 import { getStrapiMedia } from "../../lib/media";
 //import nextConfig from '../../next.config.js';
 import nextI18NextConfig from '../../next-i18next.config.js'
@@ -65,6 +65,7 @@ export async function getStaticProps({ locale, locales, defaultLocale, params })
     localizedPaths.push({ locale: loc, href: path });
   })
   console.log('servPageRes =============  localizedPaths  ', localizedPaths);
+
   return {
     props: {
       /*...(await serverSideTranslations(locale ?? 'en', [

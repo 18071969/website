@@ -68,15 +68,15 @@ export default function handler(req, res) {
     return mail
       .send(dataRes)
         .then(() => {
-          console.log('res', res.json);
+          console.log('API/MAIL *** res.json === ', res.json);  //({ error: "Internal Server Error" })
           return res.status(200).end();
         })
         .catch((error) => {
-          console.log('error1', error);
+          console.log('API/MAIL *** error1 === ', error);
           return res.status(500).send(error);
         });
   } catch(err) {
-    console.log('err2', err);
+    console.log('API/MAIL *** err2 === ', err);
   }
         
   res.status(200).json(req.body);

@@ -31,9 +31,14 @@ const Page = ({ pageContext, page, homepage, posts/*, menus*/ }) => {
     shareImage: page.attributes.SEO.shareImage.data.attributes.url,
     page: true,
   };
-  const imageUrlHero = homepage.attributes.Hero && 'http://localhost:1337' + homepage.attributes.Hero.image.data[0].attributes.url;
+  //`${process.env.NEXT_PUBLIC_STRAPI_API_URL}`
+  //const imageUrlHero = homepage.attributes.Hero && ('http://localhost:1337' + homepage.attributes.Hero.image.data[0].attributes.url);
+  const imageUrlHero = homepage.attributes.Hero && (`${process.env.NEXT_PUBLIC_STRAPI_API_URL}` + homepage.attributes.Hero.image.data[0].attributes.url);
+  //const imageUrlHero = homepage.attributes.Hero && (`${process.env.NEXT_PUBLIC_STRAPI_API_URL}` + homepage.attributes.Hero.image.data[0].attributes.url);  //process.env.NEXT_PUBLIC_STRAPI_API_URL`
+  //console.log('######################################################', (`${process.env.NEXT_PUBLIC_API_URL}` + homepage.attributes.Hero.image.data[0].attributes.url));
+  //console.log('######################################################', (`${process.env.NEXT_PUBLIC_STRAPI_API_URL}` + homepage.attributes.Hero.image.data[0].attributes.url));
   const ourMission = homepage.attributes.dynamicHomeSection[1] && homepage.attributes.dynamicHomeSection[1];
-  const servicesPreview = homepage.attributes.servicesPreview && homepage.attributes.servicesPreview;  //.services.data;
+  const servicesPreview = homepage.attributes.servicesPreview && homepage.attributes.servicesPreview;  //.services.data;http://localhost:1337
   const featuredPosts = homepage.attributes.postsSelection?.featuredPosts && homepage.attributes.postsSelection.featuredPosts;
   const { heading } = homepage.attributes.postsSelection ? homepage.attributes.postsSelection : '';
   const featuredJob = homepage.attributes.featuredJob;
@@ -57,7 +62,7 @@ const Page = ({ pageContext, page, homepage, posts/*, menus*/ }) => {
       {renderHTML(jsonToHtml(page.attributes.Content))}
 
       {(router.query.slug[0] == 'contact-us' || router.query.slug[0] == 'svrzhete-se-s-nas' || router.query.slug[0] == 'svyazatsya-s-nami') && <ContactForm />}
-      <hr className="" />
+      <hr className=""/>
       <div className="">
         {/*<div>
           {article.attributes.author.data.attributes.picture && (

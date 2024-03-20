@@ -82,6 +82,8 @@ const ServicesFeaturedSection = ( props ) => {
                       animate={animationLeft}
                       >
             <h1 className={styles.servicesTitle}>{sectionTitle}</h1>
+
+
             {/*<div className={styles.button}><Button link={`services/`}>All Services</Button></div>*/}
           </motion.div>
           <motion.div className={styles.twoThird} 

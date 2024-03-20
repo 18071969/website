@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "options_panel_general_settings_stylings",
+  "info": {
+    "singularName": "options-panel-general-settings-styling",
+    "pluralName": "options-panel-general-settings-stylings",
+    "displayName": "OptionsPanel-GeneralSettings-Styling",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "GeneralSettingsStyling": {
+      "type": "component",
+      "repeatable": false,
+      "component": "options-panel.general-settings-styling"
+    }
+  }
+}

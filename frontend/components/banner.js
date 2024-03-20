@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import Button from "./ui/button";
 import { motion } from "framer-motion";
 
@@ -5,6 +6,15 @@ import styles from "./banner.module.scss";
 
 function Banner(props) {
   //console.log('%%% styles.banner', styles.banner);
+  //console.log('BANNER 3333333333333333333333 styles.bntStyle === ', styles.btnStyle);
+  
+  const [btnClass, setBtnClass] = useState("");
+  useEffect(() => {
+    if (typeof document !== "undefined") {
+      setBtnClass(document.documentElement.style.getPropertyValue('--btn-style'));
+    }
+  }, []);
+
   return (
     <>
       <style global jsx>{`
@@ -47,7 +57,9 @@ function Banner(props) {
         <div className={styles.btns}>
           {props.buttons && props.buttons.map((button, k) => (
             <div className={styles.btn} key={k}> 
-              <Button link={button.url}>{button.label}</Button>
+              <Button type link={button.url} btnStyle={btnClass}>{button.label}</Button> 
+              {/* styles.btnStyle  className={`btn-round-shadow`}
+                {document.documentElement.style.getPropertyValue('--btn-style')}  */}             
             </div>
           ))}
         </div>

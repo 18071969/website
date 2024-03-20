@@ -78,7 +78,7 @@ export default function handler(req, res) {
   
   const responseFetch = async () => { 
     try {
-      const res = await fetch(`http://127.0.0.1:1337/api/createCustom`, config);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/createCustom`, config);  //http://127.0.0.1:1337/api/createCustom
       const data = await res.json();
       console.log('API NEWSLETTER  - data ', data);
       console.log('API NEWSLETTER  - res.ok ', res.ok);

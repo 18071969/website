@@ -1,6 +1,6 @@
 import { useTranslation } from 'next-i18next';
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Button from "./ui/button";
 import styles from "./contactForm.module.scss";
 ///import en from "../public/locales/en.json";
@@ -20,6 +20,13 @@ function ContactForm() {
   // Status of what's happening or happened in the component
   const [status, setStatus] = useState();
 
+  const [btnClass, setBtnClass] = useState("");
+  useEffect(() => {
+    if (typeof document !== "undefined") {
+      setBtnClass(document.documentElement.style.getPropertyValue('--btn-style'));
+      console.log('NEWSLETTER FORM ====================== btnClass === ', document.documentElement.style.getPropertyValue('--btn-style'));
+    }
+  }, []); 
   async function onSubmitForm(values, e) {
 
     e.preventDefault();
@@ -177,6 +184,7 @@ function ContactForm() {
       <div className={styles.formRow}>
         <Button               
           type="submit"
+          btnStyle={btnClass}
           className="inline-flex justify-center" 
           disabled={status === contactStatuses.loading}>
           {status === contactStatuses.loading ? (

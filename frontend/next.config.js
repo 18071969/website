@@ -17,6 +17,8 @@ const nextConfig = {
   },
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
+    /*includePaths: [path.join(__dirname, 'styles/scss')],
+    prependData: `@import "_variables.scss";`,*/
   },
   i18n,
   //fs: false,

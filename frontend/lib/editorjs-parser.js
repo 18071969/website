@@ -10,7 +10,7 @@ export function jsonToHtml(jsonStr) {
     let html = '';
     obj["blocks"].forEach(function(block, index) {
         
-        console.log("BLOCK === ", block);
+        //console.log("BLOCK === ", block);
         //console.log("getStrapiMedia(block['data']['file']['url'])", getStrapiMedia(block['data']['file']['url'] && getStrapiMedia(block['data']['file']['url'])));
         //console.log("getStrapiMedia(block['data']['file']['url'])", getStrapiMedia(block['data']['file']['url']));
 
@@ -50,6 +50,6 @@ export function jsonToHtml(jsonStr) {
         }
     });
     //html = html.substring(1, html.length - 1)
-    console.log('HTML === ', html)
+    //console.log('HTML === ', html)
     return html;
 }

@@ -10,16 +10,22 @@
     "strapi": "strapi"
   },
   "dependencies": {
-    "@offset-dev/strapi-calendar": "^0.0.10",
-    "@strapi/plugin-i18n": "4.5.6",
-    "@strapi/plugin-users-permissions": "4.5.6",
-    "@strapi/strapi": "^4.6.0",
+    "@offset-dev/strapi-calendar": "^0.1.1",
+    "@strapi/plugin-color-picker": "^4.20.1",
+    "@strapi/plugin-i18n": "^4.15.0",
+    "@strapi/plugin-users-permissions": "^4.15.0",
+    "@strapi/strapi": "^4.20.1",
     "better-sqlite3": "^7.6.2",
+    "npm": "^8.19.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^5.3.4",
     "strapi-html-editor": "^1.0.2",
     "strapi-plugin-local-image-sharp": "^1.4.0",
-    "strapi-plugin-menus": "^1.2.1",
-    "strapi-plugin-navigation": "^2.2.3",
-    "strapi-plugin-react-editorjs": "^2.0.2"
+    "strapi-plugin-menus": "^1.6.1",
+    "strapi-plugin-navigation": "^2.4.0",
+    "strapi-plugin-react-editorjs": "^2.0.2",
+    "styled-components": "^5.3.11"
   },
   "author": {
     "name": "A Strapi developer"
@@ -28,7 +34,7 @@
     "uuid": "d0010a74-404d-475d-a704-8ef21a129bee"
   },
   "engines": {
-    "node": ">=14.19.1 <=18.x.x",
+    "node": ">=14.19.1 <=20.x.x",
     "npm": ">=6.0.0"
   },
   "license": "MIT"

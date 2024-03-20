@@ -1,7 +1,12 @@
-@use 'variables' as v;
+//@use 'variables' as v;
+//@import '../styles/variables';
+@import "_variables.scss";
+//@import "_variables.css";
 
 .footer {
-    background-color: v.$color-primary;
+    //background-color: v.$color-primary;
+    //background-color: $color-primary;
+    background-color: $background-color;    //var(--background-color);
     padding: 5px 0 5px 5px;;
     display: flex;
     justify-content: center;

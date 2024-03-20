@@ -17,6 +17,16 @@ function ContactPage({ contactPage }) {
       shareImage: getStrapiMedia(contactPage.attributes.seo.shareImage),
       page: true,
     };
+
+    
+  if (typeof document !== "undefined") {
+    const declaration = document.styleSheets[0].cssRules[0].style;
+    console.log('NEWS PAGE declaration ============================ ', declaration);
+    const value = declaration.getPropertyValue("backgroundColor"); // "1px 2px"
+    console.log('NEWS PAGE declaration value ============================ ', value);
+  } else console.log('NEWS PAGE NOT WORKING document.styleSheets[0].cssRules[0].style ============================ ');
+ 
+
     return (
       <>
         <Seo seo={seo} />     

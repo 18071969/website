@@ -1,0 +1,27 @@
+:root {
+  --theme-skin: light;
+  --font-color: #000;
+  --link-color:#1C75B9;
+  --link-white-color:#fff;
+  --background-color: rgb(243,243,243);
+  --color-primary: #f8bbd0;
+  --color-accent: #6a1b9a;
+  --color: #2b2b2b;
+  --btn-style: default;
+}
+
+/* Dark theme */
+html[data-theme="dark"] {
+/*[data-theme="dark"] {*/
+    --font-color: #c1bfbd;
+    --link-color:#0a86da;
+    --link-white-color:#c1bfbd;
+    /*--background-color: #333;
+    --background-color-darker: color-mix(in srgb,var(--background-color),#000 15%); */
+    --background-color: lab(from var(--background-color) 10 10 10);  /*#333;*/
+    /* --background-color-darker: hsl(from var(--background-color) h s calc(l - 5%));
+    --background-color: hsl(from var(--background-color) h s calc(l - 10%)); */
+
+    --color-primary-darker: hsl(from var(--color-primary) h s calc(l - 5%)); 
+    --color-primary-darkest: hsl(from var(--color-primary) h s calc(l - 10%)); 
+}

@@ -1,7 +1,7 @@
 import { useTranslation } from 'next-i18next';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from "react-intersection-observer";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import React from "react";
 import Image from "./image";
 import Button from "./ui/button"; 
@@ -64,6 +64,13 @@ const OurMission = ({ heading, content, showLogo, image }) => {
       console.log('use effect hook, in View = ', inView);
     }, [inView, animationLeft, animationRight]);
 
+    const [btnClass, setBtnClass] = useState("");
+    useEffect(() => {
+      if (typeof document !== "undefined") {
+        setBtnClass(document.documentElement.style.getPropertyValue('--btn-style'));
+      }
+    }, []);
+
     return (
         <div ref={ref} className={styles.missionWrapper} >
           <motion.div className={styles.half}                      
@@ -93,7 +100,7 @@ const OurMission = ({ heading, content, showLogo, image }) => {
             <div>
               {content && <span className={`block text-white`}>{content}</span>}
             </div>
-            <div className={styles.button}><Button link={`/about-us`}>{t('home:our-mission-label-btn')}</Button></div>
+            <div className={styles.button}><Button link={`/about-us`} btnStyle={btnClass}>{t('home:our-mission-label-btn')}</Button></div>
           </motion.div>
           <div className={styles.half}>
             {showLogo && <motion.div className=""

@@ -63,7 +63,7 @@ function HomePage({ posts, /*categories, menus,*/ homepage }) {
   );*/
   //const imageUrl = getStrapiMedia(homepage.attributes.Hero.image.data[0]);
   const imageUrl =
-    "http://localhost:1337" +
+    /*"http://localhost:1337"*/ `${process.env.NEXT_PUBLIC_STRAPI_API_URL}` +
     homepage.attributes.Hero.image.data[0].attributes.url;
   //console.log('MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM imageUrl ', imageUrl);
   const featuredPosts = homepage.attributes.postsSelection.featuredPosts;

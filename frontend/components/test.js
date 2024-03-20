@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { useRouter } from "next/router";
 import { styled, keyframes } from "@stitches/react";
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
@@ -257,10 +257,14 @@ const ContentListItem = React.forwardRef(
   ({ children, title, ...props }, forwardedRef) => {
    
   const router = useRouter();
-  const isActive = '/'+router.locale+router.asPath === props.href;
-  //console.log("MENU_LINK $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ router.locale+router.asPath === ", '/'+router.locale+router.asPath);
-  //console.log("MENU_LINK $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ props.href ", props.href);
-  //console.log("MENU_LINK $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ isActive ", isActive);
+  //if(router.locale === 'en') props.href = '/'+router.locale+props.href;
+    
+  const isActive = (router.locale !== 'en') ? ('/'+router.locale+router.asPath === props.href) : (router.asPath === props.href);
+  //const isActive = '/'+router.locale+router.asPath === props.href;
+  /*console.log("MENU_LINK $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ router.asPath ", router.asPath);
+  console.log("MENU_LINK $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ router.locale+router.asPath === ", '/'+router.locale+router.asPath);
+  console.log("MENU_LINK $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ props.href ", props.href);
+  console.log("MENU_LINK $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ isActive ", isActive);*/
 
     return (
     <ListItem>
@@ -303,9 +307,14 @@ const renderMenu = (menus) => {
     const router = useRouter();
     //console.log('TEST <NavigationMenuItem> router = ', router);
     let url = '/'+ router.locale + router.asPath;
-    const isActive = url === items?.attributes.url;
+    //const isActive = url === items?.attributes.url; 
+    const isActive = (router.locale !== 'en') ? url === items?.attributes.url : router.asPath === items?.attributes.url; 
     //const isActive = router.asPath === items?.attributes.url;
-    
+    /*console.log("MENU_LINK renderMenu $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ url = ", url);
+    console.log("MENU_LINK renderMenu $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ router.asPath = ", router.asPath);
+    console.log("MENU_LINK renderMenu $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ items?.attributes.url = ", items?.attributes.url);
+    console.log("MENU_LINK renderMenu $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ isActive ", isActive);*/
+
     //console.log('TEST <NavigationMenuItem> /router.locale/router.asPath = ', '/'+ router.locale + router.asPath);
     //console.log('TEST <NavigationMenuItem> items?.attributes.url = ', items?.attributes.url);
     //console.log('TEST <NavigationMenuItem> items.attributes.children = ', items.attributes.children);
@@ -314,57 +323,63 @@ const renderMenu = (menus) => {
     //console.log('TEST <NavigationMenuItem> items.attributes.children?.data[0]?.id = ', items.attributes.children?.data[0]?.id);
 
     return (
-       <>
+       <Fragment key={index}>
           {(Object.keys(items.attributes.children.data).length===0) && (
-
          
           <NavigationMenuItem key={index}>   
-            {/*console.log('TEST <NavigationMenuItem> index = ', index)*/}
+          {/*console.log('=============================== ')*/}
+          {/*console.log('TEST <NavigationMenuItem> key={index} = ', index)*/}
             {/*console.log('TEST <NavigationMenuItem> items = ', items)*/}
-            <NavigationMenuLink  active={isActive} className={styles.NavigationMenuLink} href={items?.attributes.url}  key={items?.id}>
-              <NavigationMenuTriggerNoCaret key={items?.id}>
+            <NavigationMenuLink  active={isActive} className={styles.NavigationMenuLink} href={items?.attributes.url}  /*key={items?.id}*/>
+            {/*console.log('  TEST <NavigationMenuLink> key={items?.id} = ', items?.id)*/}
+              <NavigationMenuTriggerNoCaret /*key={items?.id}*/>
+              {/*console.log('    TEST <NavigationMenuTriggerNoCaret key={items?.id}> = ', items?.id)*/}
                 {items?.attributes.title}
               </NavigationMenuTriggerNoCaret>
             </NavigationMenuLink>
           </NavigationMenuItem>
           )}
           {(Object.keys(items.attributes.children.data).length>0) && (
-              <NavigationMenuItem key={items?.id}>
-                  <NavigationMenuLink  active={isActive} className={styles.NavigationMenuLink} href={items?.attributes.url}  key={items?.id}>
-                    <NavigationMenuTrigger key={items?.id}>
+              <NavigationMenuItem >{/*key={items?.id}*/}
+              {/*console.log('TEST <NavigationMenuItem key={items?.id}> ', items?.id)*/}
+                  <NavigationMenuLink  active={isActive} className={styles.NavigationMenuLink} href={items?.attributes.url}  key={items?.id}/**/>
+                  {/*console.log('  TEST <NavigationMenuLink key={items?.id}> ', items?.id)*/}
+                    <NavigationMenuTrigger >{/*key={items?.id}*/}
+                    {/*console.log('    TEST <NavigationMenuTrigger key={items?.id}> = ', items?.id)*/}
                       {items?.attributes.title}           
                     </NavigationMenuTrigger>
                   </NavigationMenuLink>
                   {(Object.keys(items.attributes.children.data).length>0) && 
                   <NavigationMenuContent>
                 {/*<NavigationMenu.Sub defaultValue="sub1"></NavigationMenu.Sub>*/} 
-                      <ContentList layout="">
-                        {items.attributes.children.data.map((k, value) => {
-                          //console.log('TEST <NavigationMenuItem> K = ', k, ' value = ', value);
-                          //console.log('TEST <NavigationMenuItem> items.attributes.children?.data[value]?.id = ', items.attributes.children?.data[value]?.id);
-                          let urlSub = '/'+ router.locale + router.asPath;
-                          const isActiveSub = urlSub === items.attributes.children?.data[value]?.attributes.url;
-                          //console.log('TEST <NavigationMenuItem> isActiveSub === ', isActiveSub,  'urlSub = ', urlSub, ' items.attributes.children?.data[value]?.attributes.url = ', items.attributes.children?.data[value]?.attributes.url);
-                          return <ContentListItem active={isActiveSub} className={styles.SubMenuLink}  key={items.attributes.children?.data[value]?.id}
-                            css={{
-                              display: 'block !important',
-                              visibility: 'visible !important',
-                              background: `linear-gradient(135deg, #fff 0%, #000 100%);`,
-                              border: '3px solid black',
-                            }}
-                            title={items.attributes.children?.data[value]?.attributes.title}
-                            href={items.attributes.children?.data[value]?.attributes.url}
-                          ></ContentListItem>
-                        })}
-                       
-                          {/*renderMenu(items.attributes.children.data)*/}
-                       
-                      </ContentList>
+                    <ContentList layout="" key="11">
+                      {items.attributes.children.data.map((k, value) => {
+                        //console.log('TEST <NavigationMenuItem> K = ', k, ' value = ', value);
+                        //console.log('TEST <NavigationMenuItem> items.attributes.children?.data[value]?.id = ', items.attributes.children?.data[value]?.id);
+                        let urlSub = '/'+ router.locale + router.asPath;
+                        const isActiveSub = urlSub === items.attributes.children?.data[value]?.attributes.url;
+                        //console.log('TEST <NavigationMenuItem> isActiveSub === ', isActiveSub,  'urlSub = ', urlSub, ' items.attributes.children?.data[value]?.attributes.url = ', items.attributes.children?.data[value]?.attributes.url);
+                        {/*console.log('      TEST <NavigationMenuContent  <ContentList <ContentListItem  key={items.attributes.children?.data[value]?.id}> ', items.attributes.children?.data[value]?.id)*/}
+                        return <ContentListItem active={isActiveSub} className={styles.SubMenuLink}  key={items.attributes.children?.data[value]?.id}/**/
+                          css={{
+                            display: 'block !important',
+                            visibility: 'visible !important',
+                            background: `linear-gradient(135deg, #fff 0%, #000 100%);`,
+                            border: '3px solid black',
+                          }}
+                          title={items.attributes.children?.data[value]?.attributes.title}
+                          href={items.attributes.children?.data[value]?.attributes.url}
+                        ></ContentListItem>
+                      })}
+                      
+                        {/*renderMenu(items.attributes.children.data)*/}
+                      
+                    </ContentList>
                   
                   </NavigationMenuContent>}
               </NavigationMenuItem>
           )}
-        </>);
+        </Fragment>);
       }
     ); 
   }

@@ -1,0 +1,77 @@
+{
+  "collectionName": "components_options_panel_general_settings_stylings",
+  "info": {
+    "displayName": "General Settings - Styling",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "ThemeSkin": {
+      "type": "enumeration",
+      "enum": [
+        "Dark",
+        "Light"
+      ],
+      "required": true
+    },
+    "ButtonStyling": {
+      "type": "enumeration",
+      "enum": [
+        "Default",
+        "Slightly Rounded",
+        "Slightly Rounded Shadow",
+        "Rounded",
+        "Rounded Shadow"
+      ]
+    },
+    "BackgroundColor": {
+      "type": "customField",
+      "regex": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$",
+      "customField": "plugin::color-picker.color"
+    },
+    "FontColor": {
+      "type": "customField",
+      "regex": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$",
+      "customField": "plugin::color-picker.color"
+    },
+    "ColumnSpacing": {
+      "type": "enumeration",
+      "enum": [
+        "Default",
+        "px30",
+        "px40",
+        "px50",
+        "px60",
+        "px70"
+      ]
+    },
+    "GeneralLinkStyle": {
+      "type": "enumeration",
+      "enum": [
+        "Inherit Accent Color",
+        "Basic Underline"
+      ]
+    },
+    "AnimatedUnderlineThickness": {
+      "type": "enumeration",
+      "enum": [
+        "px1",
+        "px2",
+        "px3",
+        "px4"
+      ]
+    },
+    "AnimatedUnderlineType": {
+      "type": "enumeration",
+      "enum": [
+        "Default",
+        "Left to Right Simple",
+        "Left to Right Fancy"
+      ]
+    },
+    "BodyBorderPassepartout": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

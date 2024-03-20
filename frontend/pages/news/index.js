@@ -2,7 +2,8 @@ import Link from "next/link";
 import Posts from "../../components/posts";
 import Seo from "../../components/seo";
 import Banner from "../../components/banner";
-import { fetchAPI } from "../../lib/api";
+import { fetchAPI, setCssVar } from "../../lib/api";
+//import { responseFetch } from "../api/css-variables";
 import { getStrapiMedia } from "../../lib/media";
 //import nextI18NextConfig from '../../next-i18next.config.js'
 //import { SSRConfig, UserConfig } from 'next-i18next';
@@ -11,15 +12,26 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 //import { useRouter } from 'next/router'
 import { getLocalizedPaths, formatSlug } from '../../lib/localize-helpers';
 
-export default function News({ posts, newspage, newsPageTr, locale, pageContext }) {
+/*function loadCssVar() {
+  fetch('http://localhost:3000/api/css-variables')
+  .then ((response) => {
+      console.log('NEWS PAGE loadCssVar response ============================ ', response),
+      responseFetch?.json())
+  }
+  .then((data) => {
+    console.log('NEWS PAGE loadCssVar data ============================ ', data);
+  });
+}*/
 
-  console.log('NEWS PAGE locale = ', locale);
+export default function News({ cssProps, posts, newspage, newsPageTr, locale, pageContext }) {
+
+  //console.log('NEWS PAGE locale = ', locale);
   const { locales, defaultLocale } = pageContext;
-  console.log('NEWS PAGE pageContext ============================ ', pageContext);
-  console.log('NEWS PAGE newsPageTr ============================ ', newsPageTr);
-
+  //console.log('NEWS PAGE pageContext ============================ ', pageContext);
+  //console.log('NEWS PAGE newsPageTr ============================ ', newsPageTr);
+ 
   const imageUrl = getStrapiMedia(newspage.attributes.headerImage);
-  console.log('NEWSPAGE ============================ ', newspage);
+  //console.log('NEWSPAGE ============================ ', newspage);
   //console.log('NEWSPAGE newspage.attributes.seo.shareImage ============================ ', newspage.attributes.seo.shareImage);
   const seo = {
     metaTitle: newspage.attributes.seo.metaTitle,
@@ -37,10 +49,11 @@ export default function News({ posts, newspage, newsPageTr, locale, pageContext 
 }
 
 export async function getStaticProps({ locale, locales, defaultLocale, params }) {
+  const arrdata = await setCssVar();
   // Run API calls in parallel
-  console.log('News page ============= params = ', params);
-  console.log('News page ============= locale = ', locale);
-  
+  //console.log('News page ============= params = ', params);
+  //console.log('News page ============= locale = ', locale);
+  //loadCssVar();
   //const [data_t] = await serverSideTranslations(locale, ['common', 'footer'], config );
   const [postsRes, newsPageRes] = await Promise.all([
     /*fetchAPI("/posts", { populate: ["featuredImage", "categories"] }),
@@ -54,8 +67,8 @@ export async function getStaticProps({ locale, locales, defaultLocale, params })
     fetchAPI("/news-page?locale="+locale+"&populate[0]=headerImage"+"&populate[1]=seo"+"&populate[2]=seo.shareImage"+"&populate[3]=localizations", {}), 
   ]);
 
-  console.log('postsRes ============= ', postsRes);
-  console.log('newsPageRes ============= ', newsPageRes);
+  //console.log('postsRes ============= ', postsRes);
+  //console.log('newsPageRes ============= ', newsPageRes);
 
   const pageContext = {
     locale: newsPageRes.data.attributes.locale,  //page.locale,
@@ -64,20 +77,21 @@ export async function getStaticProps({ locale, locales, defaultLocale, params })
     slug: 'news', //newsPageRes.data.attributes.slug,
     localizations: [],  //newsPageRes.data.attributes.localizations.data,
   };
-  console.log('newsPageRes ============= getStaticProps getLocalizedPaths({ ...pageContext }) === ', getLocalizedPaths({ ...pageContext }));
+  //console.log('newsPageRes ============= getStaticProps getLocalizedPaths({ ...pageContext }) === ', getLocalizedPaths({ ...pageContext }));
   //const localizedPaths = getLocalizedPaths({ ...pageContext });
   let localizedPaths = [];
   locales.map(loc =>{
-    console.log('newsPageRes =============  LOC ===  ', loc);
+    //console.log('newsPageRes =============  LOC ===  ', loc);
     let path = formatSlug("news", loc, defaultLocale);
-    console.log('servPageRes =============  formatSlug("news", loc, defaultLocale)  ', path);
+    //console.log('servPageRes =============  formatSlug("news", loc, defaultLocale)  ', path);
     localizedPaths.push({ locale: loc, href: path });
 
   })
-  console.log('newsPageRes =============  localizedPaths  ', localizedPaths);
+  //console.log('newsPageRes =============  localizedPaths  ', localizedPaths);
 
   return {
     props: {
+      cssProps: arrdata,
       posts: postsRes.data,
       newspage: newsPageRes.data,
        /*...(await serverSideTranslations(locale ?? 'en', [

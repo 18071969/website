@@ -1,0 +1,60 @@
+// Core Styles
+html {
+    box-sizing: border-box;
+    
+    @media only screen and (max-width: $bp-largest) {
+        font-size: 75%;
+    }
+}
+
+body {
+    //background-color: #4c4c4c;
+    background-color: $background-color;
+    font-family: $font-display;
+    //padding: 5%;
+    margin: 0;
+    color: $font-color; //$color-grey-dark-2;
+    font-weight: 300;
+    line-height: 1.6;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+  
+* {
+    box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: $font-primary;
+    //font-family: 'Lato', sans-serif;
+    color: $color-grey-dark-3;
+}
+
+h1 {
+    font-size: clamp(2rem, 1rem + 10vw , 5rem);
+    color: $color-accent;
+}
+
+.center {
+    margin: auto;
+    text-align: center;
+}
+
+@media (prefers-color-scheme: dark) {
+    html {
+        color-scheme: dark;
+    }
+    body {
+        color: white; 
+        //background: black;
+        background: $background-color;
+    }
+}

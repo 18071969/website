@@ -3,7 +3,7 @@
 
 export default {
   config: {
-    locales: [ 'en' ],
+    locales: [ 'en', 'bg', 'ru' ],
     translations: {
       en: {
         'menus.customFields.field_name.label': 'Translated Label',
